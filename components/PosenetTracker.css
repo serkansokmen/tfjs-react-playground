@@ -1,0 +1,44 @@
+body {
+  background: #000000;
+  color: white;
+}
+
+.app {
+  text-align: left;
+  position: relative;
+}
+
+button {
+  padding: 5px 12px;
+  color: white;
+}
+
+.stage {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+.scene {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+pre {
+  width: 320px;
+  max-height: 320px;
+  border-radius: 5px;
+  padding: 10px;
+  overflow-y: auto;
+  font-size: 11px;
+  line-height: 1.2;
+}
+
+video {
+  opacity: 1;
+}

@@ -1,0 +1,58 @@
+{
+  "name": "tfjs-playground",
+  "scripts": {
+    "dev": "next",
+    "build": "next build",
+    "start": "next start"
+  },
+  "dependencies": {
+    "@tensorflow-models/body-pix": "^1.0.0",
+    "@tensorflow-models/coco-ssd": "^1.0.0",
+    "@tensorflow-models/posenet": "^1.0.0",
+    "@tensorflow/tfjs": "^1.0.1",
+    "@zeit/next-css": "^1.0.1",
+    "array-to-image": "^1.0.0",
+    "dat.gui": "^0.7.5",
+    "dis-gui": "^2.1.0",
+    "formik": "^1.5.1",
+    "konva": "^3.2.0",
+    "next": "^8.0.3",
+    "prop-types": "^15.7.2",
+    "react": "^16.8.4",
+    "react-dom": "^16.8.4",
+    "react-konva": "^16.8.4",
+    "react-no-ssr": "^1.1.0",
+    "react-player": "^1.9.3",
+    "react-scripts": "2.1.5",
+    "react-spring": "^8.0.7",
+    "react-webcam": "^1.1.0",
+    "three": "^0.101.1",
+    "three-gltf-loader": "^1.101.0",
+    "use-image": "^1.0.2",
+    "victor": "^1.1.0"
+  },
+  "devDependencies": {
+    "husky": "^1.3.1",
+    "lint-staged": "^8.1.4",
+    "prettier": "^1.16.4"
+  },
+  "lint-staged": {
+    "pages/**/*.{js,jsx,json,scss,css}": [
+      "prettier --config .prettierrc --write",
+      "git add"
+    ],
+    "components/**/*.{js,jsx,json,scss,css}": [
+      "prettier --config .prettierrc --write",
+      "git add"
+    ],
+    "static/**/*.{js,jsx,json,scss,css}": [
+      "prettier --config .prettierrc --write",
+      "git add"
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  }
+}
