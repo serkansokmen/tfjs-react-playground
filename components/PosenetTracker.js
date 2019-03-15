@@ -16,6 +16,7 @@ import Skeleton from './Skeleton'
 // import ThreeScene from './ThreeScene'
 import * as dg from 'dis-gui'
 import './PosenetTracker.css'
+import useInterval from '../lib/use-interval'
 
 const initialState = {
   isReady: false,
@@ -141,7 +142,6 @@ const PosenetTracker = props => {
 
   // Refs
   const videoRef = React.createRef()
-  const intervalRef = React.createRef()
 
   const loadPosenet = async () => {
     const net = await posenet.load()
@@ -154,54 +154,44 @@ const PosenetTracker = props => {
     loadPosenet()
   }, [])
 
-  useEffect(() => {
-    
-    if (isReady && isTrackingEnabled) {
-      console.log('setup net interval')
-      intervalRef.current = setInterval(async () => {
-        const currentRef = videoRef && videoRef.current ? videoRef.current : null
+  useInterval(() => {
 
-        if (!currentRef) {
-          dispatch({ type: 'setMessage', payload: 'No input image' })
-          return
-        }
-        const imageElement = useWebcam
-          ? currentRef.getCanvas()
-          : currentRef.getInternalPlayer()
+    if (!isReady || !isTrackingEnabled) { return }
 
-        console.log(imageElement)
+    const currentRef = videoRef && videoRef.current ? videoRef.current : null
 
-        if (!imageElement || !net) {
-          dispatch({
-            type: 'setMessage',
-            payload: 'Image element or net not available',
-          })
-          return
-        }
+    if (!currentRef) {
+      dispatch({ type: 'setMessage', payload: 'No input image' })
+      return
+    }
+    const imageElement = useWebcam
+      ? currentRef.getCanvas()
+      : currentRef.getInternalPlayer()
 
-        const poses = await fetchPoses({
-          net,
-          maxPoseDetections,
-          imageElement,
-          imageScaleFactor,
-          flipHorizontal,
-          outputStride,
-          maxPoseDetections,
-          scoreThreshold,
-          nmsRadius,
-        })
-        dispatch({ type: 'setMessage', payload: `Found ${poses.length} poses` })
-        dispatch({ type: 'setPoses', payload: poses })
-        
+    console.log(imageElement)
 
-      }, updateRateMilis)
+    if (!imageElement || !net) {
+      dispatch({
+        type: 'setMessage',
+        payload: 'Image element or net not available',
+      })
+      return
     }
 
-    return () => {
-      console.log('cleanup net interval')
-      clearInterval(intervalRef.current)
-    }
-  }, [isReady, isTrackingEnabled])
+    const poses = await fetchPoses({
+      net,
+      maxPoseDetections,
+      imageElement,
+      imageScaleFactor,
+      flipHorizontal,
+      outputStride,
+      maxPoseDetections,
+      scoreThreshold,
+      nmsRadius,
+    })
+    dispatch({ type: 'setMessage', payload: `Found ${poses.length} poses` })
+    dispatch({ type: 'setPoses', payload: poses })
+  }, updateRateMilis)
 
   return (
     <div className="app">
