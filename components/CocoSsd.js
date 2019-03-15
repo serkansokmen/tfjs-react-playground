@@ -45,7 +45,10 @@ export default () => {
           fill="transparent"
           stroke="#00ff00"
         />
-        <Text offsetY={10} text={`${prediction.class} (${prediction.score})`} />
+        <Text offsetY={16} 
+          text={`${prediction.class} (${Math.round(prediction.score * 100)}%)`} 
+          fill="#ffffff"
+          fontColor="#000000"/>
       </Group>
     )
   }
@@ -61,7 +64,7 @@ export default () => {
     'Loading...'
   ) : (
     <div>
-      <div className="container">
+      <div style={{position: 'relative'}}>
         <Webcam
           ref={webcamRef}
           flipHorizontal={false}
