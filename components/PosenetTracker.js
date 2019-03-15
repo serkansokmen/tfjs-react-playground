@@ -118,7 +118,7 @@ const fetchPoses = async ({
 const PosenetTracker = props => {
   // Net
   const [net, setNet] = useState(null)
-  
+
   // State
   const [state, dispatch] = useReducer(reducer, initialState)
   const {
@@ -148,15 +148,16 @@ const PosenetTracker = props => {
     setNet(net)
     dispatch({ type: 'setReady' })
   }
-  
+
   useEffect(() => {
     console.log('load posenet')
     loadPosenet()
   }, [])
 
-  useInterval(() => {
-
-    if (!isReady || !isTrackingEnabled) { return }
+  useInterval(async () => {
+    if (!isReady || !isTrackingEnabled) {
+      return
+    }
 
     const currentRef = videoRef && videoRef.current ? videoRef.current : null
 

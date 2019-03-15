@@ -42,11 +42,15 @@
       "prettier --config .prettierrc --write",
       "git add"
     ],
+    "lib/**/*.{js,jsx,json,scss,css}": [
+      "prettier --config .prettierrc --write",
+      "git add"
+    ],
     "components/**/*.{js,jsx,json,scss,css}": [
       "prettier --config .prettierrc --write",
       "git add"
     ],
-    "static/**/*.{js,jsx,json,scss,css}": [
+    "static/**/*.{json,scss,css}": [
       "prettier --config .prettierrc --write",
       "git add"
     ]

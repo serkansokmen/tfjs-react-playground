@@ -7,6 +7,8 @@ import Layout from '../layouts/main'
 export default () => (
   <Layout>
     <Head title="Tensorflow Playground / Coco SSD" />
-    <NoSSR><CocoSsd/></NoSSR>
+    <NoSSR>
+      <CocoSsd />
+    </NoSSR>
   </Layout>
 )

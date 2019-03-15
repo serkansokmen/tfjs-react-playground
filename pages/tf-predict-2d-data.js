@@ -4,7 +4,7 @@ import Layout from '../layouts/main'
 
 const Home = () => (
   <Layout>
-    <Head title="Tensorflow Playground" />
+    <Head title="Tensorflow Playground / Make Predictions from 2D Data" />
   </Layout>
 )
 

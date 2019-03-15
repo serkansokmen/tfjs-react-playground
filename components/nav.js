@@ -8,6 +8,7 @@ const links = [
   // { href: '/tf-body-pix', label: 'Body Pix' },
   { href: '/tf-posenet', label: 'Posenet' },
   { href: '/tf-coco-ssd', label: 'Coco SSD' },
+  { href: '/tf-predict-2d-data', label: '2D Data' },
 ].map(link => {
   link.key = `nav-link-${link.href}-${link.label}`
   return link
@@ -35,7 +36,7 @@ const Nav = () => (
     <style jsx>{`
       :global(body) {
         margin: 0;
-        font-family: -apple-system, BlinkMacSystemFont, Avenir Next, Avenir, 
+        font-family: -apple-system, BlinkMacSystemFont, Avenir Next, Avenir,
           Helvetica, sans-serif;
       }
       nav {
