@@ -8,7 +8,7 @@ const links = [
   // { href: '/tf-body-pix', label: 'Body Pix' },
   { href: '/tf-posenet', label: 'Posenet' },
   { href: '/tf-coco-ssd', label: 'Coco SSD' },
-  { href: '/tf-predict-2d-data', label: '2D Data' },
+  { href: '/tf-linear-regression', label: 'Linear Regression' },
 ].map(link => {
   link.key = `nav-link-${link.href}-${link.label}`
   return link

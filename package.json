@@ -15,6 +15,7 @@
     "array-to-image": "^1.0.0",
     "dat.gui": "^0.7.5",
     "dis-gui": "^2.1.0",
+    "eslint-plugin-react-hooks": "^1.5.0",
     "formik": "^1.5.1",
     "isomorphic-unfetch": "^3.0.0",
     "konva": "^3.2.0",

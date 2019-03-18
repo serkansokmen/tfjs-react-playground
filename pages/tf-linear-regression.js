@@ -5,7 +5,6 @@ import Layout from '../layouts/main'
 import Predict2dData from '../components/Predict2dData'
 
 export default () => {
-  
   return (
     <Layout>
       <Head title="Tensorflow Playground / Make Predictions from 2D Data" />
