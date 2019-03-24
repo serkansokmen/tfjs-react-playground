@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useRef, createRef } from 'react'
 import * as bodyPix from '@tensorflow-models/body-pix'
-import useImage from 'use-image'
 import useCanvas from '../lib/use-canvas'
 import Webcam from 'react-webcam'
 import Head from '../components/head'

@@ -9,6 +9,7 @@ const links = [
   { href: '/tf-posenet', label: 'Posenet' },
   { href: '/tf-coco-ssd', label: 'Coco SSD' },
   { href: '/tf-linear-regression', label: 'Linear Regression' },
+  { href: '/tf-bakarlar', label: 'Bakarlar' },
 ].map(link => {
   link.key = `nav-link-${link.href}-${link.label}`
   return link

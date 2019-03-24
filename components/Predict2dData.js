@@ -1,4 +1,4 @@
-import React, { useState, useReducer, useEffect, useRef } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { Formik, Form, Field } from 'formik'
 import * as tf from '@tensorflow/tfjs'
 import * as tfVis from '@tensorflow/tfjs-vis'

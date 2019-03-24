@@ -1,38 +1,60 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useReducer, useEffect, useRef } from 'react'
 import * as cocoSsd from '@tensorflow-models/coco-ssd'
-import { Stage, Layer, Image, Group, Rect, Text } from 'react-konva'
+import { Stage, Layer, Group, Rect, Text } from 'react-konva'
 import useInterval from '../lib/use-interval'
 import Webcam from 'react-webcam'
 import * as dg from 'dis-gui'
 
-export default () => {
-  const [isReady, setReady] = useState(false)
-  const [isTrackingEnabled, setTrackingEnabled] = useState(false)
-  const [updateMilis, setUpdateMilis] = useState(300)
-  const [predictions, setPredictions] = useState([])
-  const [net, setNet] = useState(null)
-
-  const webcamRef = useRef()
-
-  const videoConstraints = {
+const initialState = {
+  isReady: false,
+  isTrackingEnabled: false,
+  updateMilis: 300,
+  predictions: [],
+  videoConstraints: {
     width: 640,
     height: 480,
     facingMode: 'user',
+  },
+}
+
+function reducer(state, action) {
+  const [type, payload] = action
+  console.log(`Got action type: ${type}`)
+  switch (type) {
+    case 'setReady':
+      return { ...state, isReady: true }
+    case 'setIsTrackingEnabled':
+      return { ...state, isTrackingEnabled: payload }
+    case 'setUpdateMilis':
+      return { ...state, updateMilis: payload }
+    case 'setPredictions':
+      return { ...state, predictions: payload }
+    default:
+      throw new Error('Unexpected action')
   }
+}
+
+export default () => {
+  const [state, dispatch] = useReducer(reducer, initialState)
+  const net = useRef(null)
+  const webcamRef = useRef()
 
   async function loadNet() {
-    const net = await cocoSsd.load()
-    setNet(net)
-    setReady(true)
+    net.current = await cocoSsd.load()
+    dispatch(['setReady'])
   }
 
   useEffect(() => {
     loadNet()
   }, [])
 
+  useEffect(() => {
+    if (!state.isTrackingEnabled) { dispatch(['setPredictions', []])}
+  }, [state.isTrackingEnabled])
+
   const predict = async input => {
-    const predictions = await net.detect(input)
-    setPredictions(predictions)
+    const predictions = await net.current.detect(input)
+    dispatch(['setPredictions', predictions])
   }
 
   const renderRect = (prediction, key) => {
@@ -55,12 +77,12 @@ export default () => {
 
   useInterval(() => {
     const input = webcamRef && webcamRef.current && webcamRef.current.video
-    if (isReady && isTrackingEnabled && input) {
+    if (state.isReady && state.isTrackingEnabled && input) {
       predict(input)
     }
-  }, updateMilis)
+  }, state.updateMilis)
 
-  return !isReady ? (
+  return !state.isReady ? (
     'Loading...'
   ) : (
     <div>
@@ -72,7 +94,7 @@ export default () => {
           width={640}
           height={480}
           screenshotFormat="image/jpeg"
-          videoConstraints={videoConstraints}
+          videoConstraints={state.videoConstraints}
         />
 
         <Stage
@@ -84,10 +106,10 @@ export default () => {
           width={window.innerWidth}
           height={window.innerHeight}
         >
-          <Layer>{predictions.map((p, key) => renderRect(p, key))}</Layer>
+          <Layer>{state.predictions.map((p, key) => renderRect(p, key))}</Layer>
         </Stage>
 
-        <pre>{JSON.stringify(predictions, null, 2)}</pre>
+        <pre>{JSON.stringify(state.predictions, null, 2)}</pre>
       </div>
 
       <dg.GUI
@@ -110,17 +132,17 @@ export default () => {
         <dg.Folder label="Tracking" expanded={true}>
           <dg.Checkbox
             label="enabled"
-            checked={isTrackingEnabled}
-            onFinishChange={val => setTrackingEnabled(val)}
+            checked={state.isTrackingEnabled}
+            onFinishChange={val => dispatch(['setIsTrackingEnabled', val])}
           />
-          <dg.Text label={`${predictions.length} predictions found`} />
+          <dg.Text label={`${state.predictions.length} predictions found`} />
           <dg.Number
             label="update interval"
-            value={updateMilis}
+            value={state.updateMilis}
             min={10}
             max={250}
             step={10}
-            onChange={val => setUpdateMilis(val)}
+            onChange={val => dispatch(['setUpdateMilis', val])}
           />
         </dg.Folder>
       </dg.GUI>

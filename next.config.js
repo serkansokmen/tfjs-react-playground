@@ -8,6 +8,9 @@ const nextConfig = {
     }
 
     return config
+  },
+  env: {
+    defaultVideoUrl: './static/videos/london_walk.mp4',
   }
 }
 
