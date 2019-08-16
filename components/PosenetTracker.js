@@ -1,8 +1,4 @@
-import React, {
-  useReducer,
-  useEffect,
-  useRef,
-} from 'react'
+import React, { useReducer, useEffect, useRef } from 'react'
 import * as posenet from '@tensorflow-models/posenet'
 import { Stage, Layer } from 'react-konva'
 import Webcam from 'react-webcam'
@@ -182,7 +178,7 @@ const PosenetTracker = props => {
     dispatch(['setMessage', `Found ${poses.length} poses`])
   }, updateRateMilis)
 
-  const handleVideoError = (error) => {
+  const handleVideoError = error => {
     dispatch(['useWebcam', true])
   }
 
@@ -210,9 +206,13 @@ const PosenetTracker = props => {
           onError={handleVideoError}
         />
       )}
-      
+
       <Stage
         className="stage"
+        style={{
+          position: 'absolute',
+          top: 68,
+        }}
         width={videoConstraints.width}
         height={videoConstraints.height}
       >
@@ -249,9 +249,7 @@ const PosenetTracker = props => {
           {!useWebcam && (
             <dg.Button
               label={isPlaying ? 'pause' : 'play'}
-              onClick={() =>
-                dispatch(['isPlaying', !isPlaying ])
-              }
+              onClick={() => dispatch(['isPlaying', !isPlaying])}
             />
           )}
         </dg.Folder>
@@ -259,9 +257,7 @@ const PosenetTracker = props => {
           <dg.Checkbox
             label="enabled"
             checked={isTrackingEnabled}
-            onFinishChange={val =>
-              dispatch(['isTrackingEnabled', val])
-            }
+            onFinishChange={val => dispatch(['isTrackingEnabled', val])}
           />
           <dg.Text label={`${poses.length} poses found`} />
           <dg.Number
@@ -270,24 +266,18 @@ const PosenetTracker = props => {
             min={10}
             max={250}
             step={10}
-            onChange={val =>
-              dispatch(['updateRateMilis', val])
-            }
+            onChange={val => dispatch(['updateRateMilis', val])}
           />
           <dg.Checkbox
             label="flip horizontal"
             checked={flipHorizontal}
-            onFinishChange={val =>
-              dispatch(['flipHorizontal', val])
-            }
+            onFinishChange={val => dispatch(['flipHorizontal', val])}
           />
           <dg.Select
             label="output stride"
             value={outputStride}
             options={[8, 16, 32]}
-            onFinishChange={val =>
-              dispatch(['outputStride', val * 1])
-            }
+            onFinishChange={val => dispatch(['outputStride', val * 1])}
           />
           <dg.Number
             label="max poses"
@@ -295,18 +285,14 @@ const PosenetTracker = props => {
             min={1}
             max={10}
             step={1}
-            onFinishChange={val =>
-              dispatch(['maxPoseDetections', val])
-            }
+            onFinishChange={val => dispatch(['maxPoseDetections', val])}
           />
           <dg.Number
             label="score threshold"
             value={scoreThreshold}
             min={0.01}
             max={1}
-            onFinishChange={val =>
-              dispatch(['scoreThreshold', val])
-            }
+            onFinishChange={val => dispatch(['scoreThreshold', val])}
           />
           <dg.Number
             label="nms radius"
@@ -314,9 +300,7 @@ const PosenetTracker = props => {
             min={1}
             max={100}
             step={1}
-            onFinishChange={val =>
-              dispatch(['nmsRadius', val])
-            }
+            onFinishChange={val => dispatch(['nmsRadius', val])}
           />
         </dg.Folder>
       </dg.GUI>
@@ -324,35 +308,35 @@ const PosenetTracker = props => {
       <pre>{JSON.stringify(poses, null, 2)}</pre>
 
       <style jsx>{`
-      .stage {
-        position: absolute;
-        top: 0;
-        right: 0;
-        bottom: 0;
-        left: 0;
-      }
-      
-      .scene {
-        position: absolute;
-        top: 0;
-        right: 0;
-        bottom: 0;
-        left: 0;
-      }
-      
-      pre {
-        width: 320px;
-        max-height: 320px;
-        border-radius: 5px;
-        padding: 10px;
-        overflow-y: auto;
-        font-size: 11px;
-        line-height: 1.2;
-      }
-      
-      video {
-        opacity: 1;
-      }      
+        .stage {
+          position: absolute;
+          top: 0;
+          right: 0;
+          bottom: 0;
+          left: 0;
+        }
+
+        .scene {
+          position: absolute;
+          top: 0;
+          right: 0;
+          bottom: 0;
+          left: 0;
+        }
+
+        pre {
+          width: 320px;
+          max-height: 320px;
+          border-radius: 5px;
+          padding: 10px;
+          overflow-y: auto;
+          font-size: 11px;
+          line-height: 1.2;
+        }
+
+        video {
+          opacity: 1;
+        }
       `}</style>
     </div>
   )
