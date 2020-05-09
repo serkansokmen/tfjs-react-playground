@@ -6,6 +6,7 @@ const links = [
   { href: '/tf-xor', label: 'XOR' },
   // { href: '/tf-cnn', label: 'CNN' },
   // { href: '/tf-body-pix', label: 'Body Pix' },
+  { href: '/tf-lstm?key=oscar-wilde-soul-of-man', label: 'LSTM' },
   { href: '/tf-posenet', label: 'Posenet' },
   { href: '/tf-coco-ssd', label: 'Coco SSD' },
   { href: '/tf-linear-regression', label: 'Linear Regression' },

@@ -15,7 +15,7 @@ const initialState = {
   isTransfering: false,
   mouseVec: {
     x: 256 / 2,
-    y: 246 / 2
+    y: 256 / 2,
   },
   blurAmount: 3,
   noiseAmount: 1,
@@ -32,7 +32,7 @@ function reducer(state, action) {
     case 'setIsTransfering':
       return { ...state, isTransfering: payload }
     case 'setIsTrackingEnabled':
-    return { ...state, isTrackingEnabled: payload }
+      return { ...state, isTrackingEnabled: payload }
     case 'setMouseVec':
       return { ...state, mouseVec: payload }
     case 'setResult':
@@ -45,17 +45,17 @@ function reducer(state, action) {
       return { ...state, blurAmount: payload }
     case 'setNoise':
       return { ...state, noiseAmount: payload }
-    default: throw new Error('unknown action')
+    default:
+      throw new Error('unknown action')
   }
 }
 
 export default () => {
-  
   const stageRef = useRef()
   const outputCanvasRef = useRef()
   const circleToEye = useRef()
   const inputGroupRef = useRef()
-  
+
   const [state, dispatch] = useReducer(reducer, initialState)
   const [testInput] = useImage('/static/images/guide.png')
 
@@ -63,9 +63,9 @@ export default () => {
     dispatch(['setIsReady', true])
   }
 
-  const predict = (element) => {
+  const predict = element => {
     dispatch(['setIsTransfering', true])
-    
+
     // // Apply pix2pix transformation
     circleToEye.current.transfer(element, result => {
       dispatch(['setIsTransfering', false])
@@ -73,17 +73,23 @@ export default () => {
     })
   }
 
-  const handleMouseMove = (e) => {
+  const handleMouseMove = e => {
     const { OUTER_RING_SIZE, SIZE } = state
-    const x = OUTER_RING_SIZE / 2 + mapRange(e.pageX, 0, window.innerWidth, 0, SIZE - OUTER_RING_SIZE)
-    const y = OUTER_RING_SIZE / 2 + mapRange(e.pageY, 0, window.innerHeight, 0, SIZE - OUTER_RING_SIZE)
+    const x =
+      OUTER_RING_SIZE / 2 +
+      mapRange(e.pageX, 0, window.innerWidth, 0, SIZE - OUTER_RING_SIZE)
+    const y =
+      OUTER_RING_SIZE / 2 +
+      mapRange(e.pageY, 0, window.innerHeight, 0, SIZE - OUTER_RING_SIZE)
     dispatch(['setMouseVec', { x, y }])
     inputGroupRef.current && inputGroupRef.current.cache()
   }
 
   useInterval(() => {
     const { isReady, isTrackingEnabled } = state
-    if (!isReady || !isTrackingEnabled) { return }
+    if (!isReady || !isTrackingEnabled) {
+      return
+    }
 
     const input = stageRef.current.toCanvas({
       x: 0,
@@ -91,16 +97,18 @@ export default () => {
       width: state.SIZE,
       height: state.SIZE,
       pixelRatio: 1,
-      callback: (input) => {
+      callback: input => {
         // dispatch(['setInputReady', true])
-      }
+      },
     })
     predict(input)
-
   }, state.updateMilis)
 
   useEffect(() => {
-    circleToEye.current = pix2pix('/static/models/bakarlar_002_BtoA.pict', modelLoaded)
+    circleToEye.current = pix2pix(
+      '/static/models/bakarlar_002_BtoA.pict',
+      modelLoaded
+    )
     window.addEventListener('mousemove', handleMouseMove)
     return () => {
       window.removeEventListener('mousemove', handleMouseMove)
@@ -110,9 +118,15 @@ export default () => {
 
   return (
     <>
-      <Stage ref={stageRef} width={state.SIZE*2} height={state.SIZE}>
+      <Stage ref={stageRef} width={state.SIZE * 2} height={state.SIZE}>
         <Layer>
-          <Image image={testInput} x={0} y={0} width={state.SIZE} height={state.SIZE} />
+          <Image
+            image={testInput}
+            x={0}
+            y={0}
+            width={state.SIZE}
+            height={state.SIZE}
+          />
           <Group
             ref={inputGroupRef}
             filters={[Konva.Filters.Noise, Konva.Filters.Blur]}
@@ -120,7 +134,8 @@ export default () => {
             noise={state.noiseAmount}
             offsetY={15}
             width={state.SIZE}
-            height={state.SIZE}>
+            height={state.SIZE}
+          >
             {/* <Circle 
               x={state.SIZE/2} 
               y={state.SIZE/2} 
@@ -129,9 +144,15 @@ export default () => {
               fill="transparent" 
               stroke="black" 
               lineWidth={2}/> */}
-            <Circle x={state.mouseVec.x} y={state.mouseVec.y} width={state.PUPIL_SIZE} height={state.PUPIL_SIZE} fill="black"/>
+            <Circle
+              x={state.mouseVec.x}
+              y={state.mouseVec.y}
+              width={state.PUPIL_SIZE}
+              height={state.PUPIL_SIZE}
+              fill="black"
+            />
           </Group>
-          {state.result && <Image image={state.result} x={state.SIZE}/>}
+          {state.result && <Image image={state.result} x={state.SIZE} />}
         </Layer>
       </Stage>
       {!state.isReady && 'Loading model...'}
@@ -179,7 +200,7 @@ export default () => {
             label="pupil size"
             value={state.PUPIL_SIZE}
             min={10}
-            max={state.OUTER_RING_SIZE/2}
+            max={state.OUTER_RING_SIZE / 2}
             step={1}
             onChange={val => dispatch(['setPupilSize', val])}
           />
