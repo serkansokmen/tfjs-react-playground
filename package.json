@@ -14,7 +14,7 @@
     "@zeit/next-css": "1.0.1",
     "array-to-image": "1.0.0",
     "classnames": "2.2.6",
-    "dat.gui": "0.7.6",
+    "dat.gui": "0.7.7",
     "dis-gui": "2.1.0",
     "eslint-plugin-react-hooks": "1.7.0",
     "formik": "1.5.8",
