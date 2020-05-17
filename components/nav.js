@@ -11,7 +11,7 @@ const links = [
   { href: '/tf-coco-ssd', label: 'Coco SSD' },
   { href: '/tf-linear-regression', label: 'Linear Regression' },
   { href: '/tf-bakarlar', label: 'Bakarlar' },
-].map(link => {
+].map((link) => {
   link.key = `nav-link-${link.href}-${link.label}`
   return link
 })
@@ -20,7 +20,7 @@ const Nav = () => (
   <nav>
     <ul>
       <li>
-        <Link prefetch href="/">
+        <Link href="/">
           <a>Home</a>
         </Link>
       </li>
