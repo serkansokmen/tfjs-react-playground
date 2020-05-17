@@ -10902,12 +10902,10 @@ react-spring@8.0.27:
     "@babel/runtime" "^7.3.1"
     prop-types "^15.5.8"
 
-react-webcam@1.1.1:
-  version "1.1.1"
-  resolved "https://registry.yarnpkg.com/react-webcam/-/react-webcam-1.1.1.tgz#03c69c4d61e36b817063504fc09541b4fff52d2e"
-  integrity sha512-tCumV/G42jcMizTu4ORR5tJw0QLU4CS5cgYIpaz+vWuPcqo2y2xNSiWdpnyn5ZTjd+8QSyZeZnKzGycn6q2VZA==
-  dependencies:
-    prop-types "^15.5.8"
+react-webcam@5.0.1:
+  version "5.0.1"
+  resolved "https://registry.yarnpkg.com/react-webcam/-/react-webcam-5.0.1.tgz#36f3bb243cda8f8790e8a6906574384ab40f7c14"
+  integrity sha512-Ccyxr1IpnU9xxVGUdWK7Mlr21n7bL11HbqYL5f5M5Szz+GTy52ql6hoJr32q+Rq9qogIlmp32xQgxtOu3EtICg==
 
 react@16.9.0:
   version "16.9.0"
