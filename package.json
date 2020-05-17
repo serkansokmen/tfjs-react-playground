@@ -6,7 +6,7 @@
     "start": "next start"
   },
   "dependencies": {
-    "@tensorflow-models/body-pix": "1.1.2",
+    "@tensorflow-models/body-pix": "2.0.5",
     "@tensorflow-models/coco-ssd": "2.0.3",
     "@tensorflow-models/posenet": "1.0.3",
     "@tensorflow/tfjs": "1.7.4",
