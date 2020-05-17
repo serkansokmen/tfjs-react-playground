@@ -18,6 +18,6 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-/static/models
-/static/images
-/static/videos
+/public/static/models
+/public/static/images
+/public/static/videos
