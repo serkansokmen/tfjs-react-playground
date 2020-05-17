@@ -12547,7 +12547,7 @@ vega-format@^1.0.0:
     vega-time "^2.0.0"
     vega-util "^1.14.0"
 
-vega-functions@^5.3.0, vega-functions@^5.6.0, vega-functions@^5.7.0:
+vega-functions@5.7.0, vega-functions@^5.3.0, vega-functions@^5.6.0, vega-functions@^5.7.0:
   version "5.7.0"
   resolved "https://registry.yarnpkg.com/vega-functions/-/vega-functions-5.7.0.tgz#07cb29d9f0c2a65497edbb0c4e064b31b9e78cb4"
   integrity sha512-Ea8pFE0BiPrsSxnFSenOI4oanoitoJcPS+P81JdJM3Bgd8DkyiGaoN3484PDhzk4WWVleopyG0LhId25SlsSEA==

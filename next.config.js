@@ -1,17 +1,15 @@
-const withCSS = require('@zeit/next-css')
-
 const nextConfig = {
-  webpack: config => {
+  webpack: (config) => {
     // Fixes npm packages that depend on `fs` module
     config.node = {
-      fs: 'empty'
+      fs: 'empty',
     }
 
     return config
   },
   env: {
     defaultVideoUrl: './static/videos/london_walk.mp4',
-  }
+  },
 }
 
-module.exports = withCSS(nextConfig)
+module.exports = nextConfig
