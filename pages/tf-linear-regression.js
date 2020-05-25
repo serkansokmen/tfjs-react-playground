@@ -12,5 +12,5 @@ export default () => {
         <Predict2dData />
       </NoSSR>
     </Layout>
-  )  
+  )
 }

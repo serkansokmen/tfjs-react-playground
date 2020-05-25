@@ -3,7 +3,8 @@
   "scripts": {
     "dev": "next",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "format": "prettier --write '{components,lib,pages,__{tests,mocks}__}/**/*.{js,css,html}'"
   },
   "dependencies": {
     "@tensorflow-models/body-pix": "2.0.5",
@@ -33,7 +34,6 @@
     "three": "0.116.1",
     "three-gltf-loader": "1.111.0",
     "use-image": "1.0.5",
-    "vega-functions": "5.7.0",
     "victor": "1.1.0"
   },
   "devDependencies": {

@@ -4,7 +4,12 @@ import Head from '../components/head'
 import Layout from '../layouts/main'
 
 // Training set which takes two inputs and one output
-const xs = tf.tensor2d([[0, 0], [0, 1], [1, 0], [1, 1]])
+const xs = tf.tensor2d([
+  [0, 0],
+  [0, 1],
+  [1, 0],
+  [1, 1],
+])
 const ys = tf.tensor2d([[0], [1], [1], [0]])
 
 // Two dense layers with two different nonlinear activation functions

@@ -10,11 +10,7 @@ function f(x) {
   const f2 = x.pow(tf.scalar(4, 'int32')).mul(tf.scalar(2)) // 2x^4
   const f3 = x.pow(tf.scalar(2, 'int32')).mul(tf.scalar(3)) // 3x^2
   const f4 = tf.scalar(1) // 1
-  return f1
-    .add(f2)
-    .add(f3)
-    .add(x)
-    .add(f4)
+  return f1.add(f2).add(f3).add(x).add(f4)
 }
 
 export default () => {
@@ -38,7 +34,7 @@ export default () => {
       <Head title="Tensorflow Playground / Intro" />
       <Formik
         initialValues={{ epochs: 200, learningRate: 0.9 }}
-        onSubmit={values => {
+        onSubmit={(values) => {
           const result = minimize(values.epochs, values.learningRate)
           setResult(result)
         }}

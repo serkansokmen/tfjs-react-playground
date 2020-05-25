@@ -49,7 +49,7 @@ export default () => {
     setNet(net)
   }
 
-  const canvasRef = useCanvas(gl => {
+  const canvasRef = useCanvas((gl) => {
     // console.log(gl)
     // gl.clearColor(0.0, 0.0, 0.0, 1.0);
     // gl.clearDepth(1.0);

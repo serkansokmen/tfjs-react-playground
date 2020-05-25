@@ -5,25 +5,24 @@ import * as tfVis from '@tensorflow/tfjs-vis'
 import fetch from 'isomorphic-unfetch'
 
 export default () => {
-  
   const [init, setInit] = useState(false)
   const [isTraining, setIsTraining] = useState(false)
   const [data, setData] = useState([])
 
   const modelRef = useRef(createModel())
-  
+
   useEffect(() => {
     getData()
   }, [])
 
   useEffect(() => {
     if (!init && data.length > 0) {
-      const values = data.map(d => ({
+      const values = data.map((d) => ({
         x: d.horsepower,
         y: d.mpg,
       }))
       tfVis.render.scatterplot(
-        { name: 'Horsepower v MPG'},
+        { name: 'Horsepower v MPG' },
         { values },
         {
           xLabel: 'Horsepower',
@@ -32,19 +31,22 @@ export default () => {
         }
       )
       modelRef.current &&
-        tfVis.show.modelSummary({name: 'Model Summary'}, modelRef.current)
+        tfVis.show.modelSummary({ name: 'Model Summary' }, modelRef.current)
       setInit(true)
     }
   }, [data, init])
 
   async function getData() {
-    const req = await fetch('https://storage.googleapis.com/tfjs-tutorials/carsData.json')
+    const req = await fetch(
+      'https://storage.googleapis.com/tfjs-tutorials/carsData.json'
+    )
     const data = await req.json()
-    const cleaned = data.map(d => ({
-      mpg: d['Miles_per_Gallon'],
-      horsepower: d['Horsepower'],
-    }))
-    .filter(d => d.mpg != null && d.horsepower != null)
+    const cleaned = data
+      .map((d) => ({
+        mpg: d['Miles_per_Gallon'],
+        horsepower: d['Horsepower'],
+      }))
+      .filter((d) => d.mpg != null && d.horsepower != null)
     setData(cleaned)
   }
 
@@ -67,15 +69,15 @@ export default () => {
   }
 
   function convertToTensor(data) {
-    // Wrapping these calculations in a tidy will dispose any 
+    // Wrapping these calculations in a tidy will dispose any
     // intermediate tensors.
     return tf.tidy(() => {
       // Step 1. shuffle data
       tf.util.shuffle(data)
 
       // Step 2. convert data to Tensor
-      const inputs = data.map(d => d.horsepower)
-      const labels = data.map(d => d.mpg)
+      const inputs = data.map((d) => d.horsepower)
+      const labels = data.map((d) => d.mpg)
 
       const inputTensor = tf.tensor2d(inputs, [inputs.length, 1])
       const labelTensor = tf.tensor2d(labels, [labels.length, 1])
@@ -86,8 +88,12 @@ export default () => {
       const labelMax = labelTensor.max()
       const labelMin = labelTensor.min()
 
-      const normalizedInputs = inputTensor.sub(inputMin).div(inputMax.sub(inputMin))
-      const normalizedLabels = labelTensor.sub(labelMin).div(labelMax.sub(labelMin))
+      const normalizedInputs = inputTensor
+        .sub(inputMin)
+        .div(inputMax.sub(inputMin))
+      const normalizedLabels = labelTensor
+        .sub(labelMin)
+        .div(labelMax.sub(labelMin))
 
       return {
         inputs: normalizedInputs,
@@ -117,14 +123,14 @@ export default () => {
     }
 
     return await model.fit(inputs, labels, {
-      batchSize, 
+      batchSize,
       epochs,
       shuffle: true,
       callbacks: tfVis.show.fitCallbacks(
         { name: 'Training Performance' },
-        [ 'loss', 'mse' ],
-        { height: 200, callbacks: [new EarlyStoppingCallback(), 'onEpochEnd'] },
-      )
+        ['loss', 'mse'],
+        { height: 200, callbacks: [new EarlyStoppingCallback(), 'onEpochEnd'] }
+      ),
     })
   }
 
@@ -132,7 +138,7 @@ export default () => {
     const { inputMax, inputMin, labelMax, labelMin } = normalizationData
 
     // Generate predictions for a uniform range of numbers between 0 and 1;
-    // We un-normalize the data by doing the inverse of the min-max scaling 
+    // We un-normalize the data by doing the inverse of the min-max scaling
     // that we did earlier.
     const [xs, preds] = tf.tidy(() => {
       const xs = tf.linspace(0, 1, 100)
@@ -146,64 +152,81 @@ export default () => {
     })
 
     const predictedPoints = Array.from(xs).map((val, i) => ({
-      x: val, y: preds[i]
+      x: val,
+      y: preds[i],
     }))
 
-    const originalPoints = inputData.map(d => ({
-      x: d.horsepower, y: d.mpg
+    const originalPoints = inputData.map((d) => ({
+      x: d.horsepower,
+      y: d.mpg,
     }))
 
     tfVis.render.scatterplot(
-      {name: 'Model Predictions vs Original Data'}, 
-      {values: [originalPoints, predictedPoints], series: ['original', 'predicted']}, 
+      { name: 'Model Predictions vs Original Data' },
+      {
+        values: [originalPoints, predictedPoints],
+        series: ['original', 'predicted'],
+      },
       {
         xLabel: 'Horsepower',
         yLabel: 'MPG',
-        height: 300
+        height: 300,
       }
     )
   }
-  
-  return init && (
-    <Formik
-      initialValues={{
-        epochs: 100,
-        batchSize: 58,
-      }}
-      onSubmit={values => {
-        
-        // Initialize training
-        console.log(data.length)
-        const tensorData = convertToTensor(data)
-        const { inputs, labels } = tensorData
-        const { epochs, batchSize } = values
-        
-        
-        // Train the model
-        if (!isTraining) {
-          setIsTraining(true)
-          trainModel({ inputs, labels, epochs, batchSize }).then((model) => {
-            setIsTraining(false)
-          })
-        }
-      }}>
-      {() => (
-        <Form>
-          <div>
-            <Field placeholder="Epochs" type="number" name="epochs" />
-          </div>
-          <div>
-            <Field placeholder="Batch Size" type="number" name="batchSize" />
-          </div>
-          
-          <button type="submit" disabled={isTraining}>Train</button>
-          {isTraining && <button type="button" onClick={() => setIsTraining(false)}>Stop Training</button>}
-          <button type="button" onClick={() => testModel(data, convertToTensor(data))}>Test</button>
-          <div>
-            <pre>{JSON.stringify(data, null, 2)}</pre>
-          </div>
-        </Form>
-      )}
-    </Formik>
-  )  
+
+  return (
+    init && (
+      <Formik
+        initialValues={{
+          epochs: 100,
+          batchSize: 58,
+        }}
+        onSubmit={(values) => {
+          // Initialize training
+          console.log(data.length)
+          const tensorData = convertToTensor(data)
+          const { inputs, labels } = tensorData
+          const { epochs, batchSize } = values
+
+          // Train the model
+          if (!isTraining) {
+            setIsTraining(true)
+            trainModel({ inputs, labels, epochs, batchSize }).then((model) => {
+              setIsTraining(false)
+            })
+          }
+        }}
+      >
+        {() => (
+          <Form>
+            <div>
+              <Field placeholder="Epochs" type="number" name="epochs" />
+            </div>
+            <div>
+              <Field placeholder="Batch Size" type="number" name="batchSize" />
+            </div>
+
+            <button type="submit" disabled={isTraining}>
+              Train
+            </button>
+            {isTraining && (
+              <button type="button" onClick={() => setIsTraining(false)}>
+                Stop Training
+              </button>
+            )}
+            <button
+              type="button"
+              onClick={() => testModel(data, convertToTensor(data))}
+            >
+              Test
+            </button>
+            <div>
+              <pre>{JSON.stringify(data, null, 2)}</pre>
+            </div>
+          </Form>
+        )}
+      </Formik>
+    )
+  )
 }

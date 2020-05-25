@@ -46,7 +46,7 @@ LSTM.getInitialProps = ({ query }) => {
   return { query }
 }
 
-const LSTMPage = props => (
+const LSTMPage = (props) => (
   <NoSSR>
     <LSTM {...props} />
   </NoSSR>

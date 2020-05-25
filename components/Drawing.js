@@ -1,4 +1,10 @@
-import React, { useReducer, useEffect, useRef, forwardRef, useImperativeHandle } from 'react'
+import React, {
+  useReducer,
+  useEffect,
+  useRef,
+  forwardRef,
+  useImperativeHandle,
+} from 'react'
 import { Image, Group, Rect } from 'react-konva'
 import useImage from 'use-image'
 
@@ -20,18 +26,32 @@ function reducer(state, action) {
       return { ...state, isDrawing: payload }
     case 'updatePointerPosition':
       return { ...state, lastPointerPosition: payload }
-    default: throw new Error('unknown action')
+    default:
+      throw new Error('unknown action')
   }
 }
 
-const Drawing = ({ width, height, background = '#ffffff', stroke = '#000000', lineWidth = 1, mode = 'draw', sampleImageUrl, onUpdate }, ref) => {
-  
+const Drawing = (
+  {
+    width,
+    height,
+    background = '#ffffff',
+    stroke = '#000000',
+    lineWidth = 1,
+    mode = 'draw',
+    sampleImageUrl,
+    onUpdate,
+  },
+  ref
+) => {
   const [state, dispatch] = useReducer(reducer, initialState)
   const [sampleImage, status] = useImage(sampleImageUrl)
   const imageRef = useRef()
-  
+
   const handleMouseDown = () => {
-    if (!state.isReady) { return }
+    if (!state.isReady) {
+      return
+    }
     const stage = imageRef.current.getStage()
     dispatch(['isDrawing', true])
     dispatch(['updatePointerPosition', stage.getPointerPosition()])
@@ -42,15 +62,16 @@ const Drawing = ({ width, height, background = '#ffffff', stroke = '#000000', li
   }
 
   const handleMouseMove = () => {
-    
     const { context, isDrawing, isReady } = state
-    
-    if (!isReady || !isDrawing) { return }
+
+    if (!isReady || !isDrawing) {
+      return
+    }
 
     context.strokeStyle = stroke
     context.lineJoin = 'round'
     context.lineWidth = lineWidth
-    
+
     if (mode === 'draw') {
       // draw
       context.globalCompositeOperation = 'source-over'
@@ -62,15 +83,15 @@ const Drawing = ({ width, height, background = '#ffffff', stroke = '#000000', li
 
     var localPos = {
       x: state.lastPointerPosition.x - imageRef.current.x(),
-      y: state.lastPointerPosition.y - imageRef.current.y()
-    };
+      y: state.lastPointerPosition.y - imageRef.current.y(),
+    }
     context.moveTo(localPos.x, localPos.y)
 
     const stage = imageRef.current.getStage()
     var pos = stage.getPointerPosition()
     localPos = {
       x: pos.x - imageRef.current.x(),
-      y: pos.y - imageRef.current.y()
+      y: pos.y - imageRef.current.y(),
     }
     context.lineTo(localPos.x, localPos.y)
     context.closePath()
@@ -93,7 +114,7 @@ const Drawing = ({ width, height, background = '#ffffff', stroke = '#000000', li
     const context = canvas.getContext('2d')
     // context.fillStyle = background
     // context.fillRect(0, 0, width, height)
-    
+
     dispatch(['setupCanvas', { canvas, context }])
   }, [])
 
@@ -116,9 +137,11 @@ const Drawing = ({ width, height, background = '#ffffff', stroke = '#000000', li
 
   useImperativeHandle(ref, () => ({
     clear: () => {
-      if (!state.isReady) { return }
+      if (!state.isReady) {
+        return
+      }
       clearCanvas()
-    }
+    },
   }))
 
   return (
