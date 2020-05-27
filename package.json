@@ -16,7 +16,7 @@
     "classnames": "2.2.6",
     "dat.gui": "0.7.7",
     "dis-gui": "2.1.0",
-    "eslint-plugin-react-hooks": "4.0.2",
+    "eslint-plugin-react-hooks": "4.0.4",
     "formik": "2.1.4",
     "isomorphic-unfetch": "3.0.0",
     "konva": "6.0.0",
