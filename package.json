@@ -29,7 +29,7 @@
     "react-player": "2.6.0",
     "react-scripts": "3.4.1",
     "react-spring": "8.0.27",
-    "react-webcam": "5.0.2",
+    "react-webcam": "5.2.0",
     "three": "0.117.1",
     "three-gltf-loader": "1.111.0",
     "use-image": "1.0.5",

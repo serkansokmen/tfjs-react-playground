@@ -9914,10 +9914,10 @@ react-spring@8.0.27:
     "@babel/runtime" "^7.3.1"
     prop-types "^15.5.8"
 
-react-webcam@5.0.2:
-  version "5.0.2"
-  resolved "https://registry.yarnpkg.com/react-webcam/-/react-webcam-5.0.2.tgz#c0d1f8f604d7974fa74cf2dbfbc68128dc88c909"
-  integrity sha512-RtzV6+xzz9Uh0fJaPPCAau2Ij7g+8oT6a7GQisitAifasEyuz8mIJH4k1eBEpw0UDfo69U9XsMtHnchxLhm7VQ==
+react-webcam@5.2.0:
+  version "5.2.0"
+  resolved "https://registry.yarnpkg.com/react-webcam/-/react-webcam-5.2.0.tgz#da3991336d262d6dd6c51e6265402927bb0343ef"
+  integrity sha512-mz/ehO/iTpnU6RcJgGRg1vjLh+ydm0jfJb84Fwws4YrXYf2IjrZlOn9eZ/Iu+/EJeKf8SlZEnu3G8Pz7atRN8w==
 
 react@16.13.1:
   version "16.13.1"
