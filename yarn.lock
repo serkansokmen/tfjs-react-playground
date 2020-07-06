@@ -1458,10 +1458,10 @@
   resolved "https://registry.yarnpkg.com/@tensorflow-models/body-pix/-/body-pix-2.0.5.tgz#c9d0b55c3093a3ccebc05948ba057dd7bf9cbc53"
   integrity sha512-zEke/JjGajqZ00b1X4KVq2yevSfl6HxysDnM8WLHVARrbTbCo3RliZZ0m+AuM/q+UASgmzpiyrEXQYUmmy+H3g==
 
-"@tensorflow-models/coco-ssd@2.0.3":
-  version "2.0.3"
-  resolved "https://registry.yarnpkg.com/@tensorflow-models/coco-ssd/-/coco-ssd-2.0.3.tgz#def1e23e4db0f6495bc41de9282af3e4cb392d18"
-  integrity sha512-jTyGC6on59ENZNVm5GYtGn3JNaM/7nULMB/2At11MavvQt6Rlfht/5BJs/r5Hty2r7BB4C6iDrllrkXRZeOtLQ==
+"@tensorflow-models/coco-ssd@2.1.0":
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/@tensorflow-models/coco-ssd/-/coco-ssd-2.1.0.tgz#f6b133042dc9b427cd15ad67a8261e88e4143606"
+  integrity sha512-OiNt6PkbLNaKXUS9Pp2USY236inZ5/aS6swkzqSiMztGF7ikctjTa98ZIMldG9yl6hNHZaH/in2ndxOGUQ6r5Q==
 
 "@tensorflow-models/posenet@2.2.1":
   version "2.2.1"
