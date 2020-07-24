@@ -10,7 +10,7 @@
     "@tensorflow-models/coco-ssd": "2.0.3",
     "@tensorflow-models/posenet": "2.2.1",
     "@tensorflow/tfjs": "2.0.0",
-    "@tensorflow/tfjs-vis": "1.4.0",
+    "@tensorflow/tfjs-vis": "1.4.3",
     "@zeit/next-css": "1.0.1",
     "array-to-image": "1.0.0",
     "classnames": "2.2.6",
