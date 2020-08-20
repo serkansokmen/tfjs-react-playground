@@ -7321,10 +7321,10 @@ kleur@^3.0.3:
   resolved "https://registry.yarnpkg.com/kleur/-/kleur-3.0.3.tgz#a79c9ecc86ee1ce3fa6206d1216c501f147fc07e"
   integrity sha512-eTIzlVOSUR+JxdDFepEYcBMtZ9Qqdef+rnzWdRZuMbOywu5tO2w2N7rqjoANZ5k9vywhL6Br1VRjUIgTQx4E8w==
 
-konva@7.0.3:
-  version "7.0.3"
-  resolved "https://registry.yarnpkg.com/konva/-/konva-7.0.3.tgz#7841e4f8bfd1ce839cf38390b7e33d79a4b2ac34"
-  integrity sha512-Qgq4DtzNeJdx2f5wDnhcvojddvYFYn/8dNvf0TrGe3sVyYMG3Jj/aVq37dfjYlOzvWPlE1aGcc0xqNRpnxHL5A==
+konva@7.0.5:
+  version "7.0.5"
+  resolved "https://registry.yarnpkg.com/konva/-/konva-7.0.5.tgz#86741b08f30c7f613df7b57588b08c6170b95a5e"
+  integrity sha512-qeJ112iOBhHeBjHiVHWyKapijfnLoIZNU+kDu8s4feyEnTTYhaI27uj9Nqgma0zwPPIo/NLGaD89rbA8hnDXPA==
 
 last-call-webpack-plugin@^3.0.0:
   version "3.0.0"
@@ -11391,7 +11391,7 @@ terser-webpack-plugin@^1.4.3:
     webpack-sources "^1.4.0"
     worker-farm "^1.7.0"
 
-terser@4.8.0:
+terser@4.8.0, terser@^4.6.12:
   version "4.8.0"
   resolved "https://registry.yarnpkg.com/terser/-/terser-4.8.0.tgz#63056343d7c70bb29f3af665865a46fe03a0df17"
   integrity sha512-EAPipTNeWsb/3wLPeup1tVPaXfIaU68xMnVdPafIL1TV05OhASArYyIfFvnvJCNrR2NIOvDVNNTFRa+Re2MWyw==
@@ -11404,15 +11404,6 @@ terser@^4.1.2, terser@^4.6.3:
   version "4.7.0"
   resolved "https://registry.yarnpkg.com/terser/-/terser-4.7.0.tgz#15852cf1a08e3256a80428e865a2fa893ffba006"
   integrity sha512-Lfb0RiZcjRDXCC3OSHJpEkxJ9Qeqs6mp2v4jf2MHfy8vGERmVDuvjXdd/EnP5Deme5F2yBRBymKmKHCBg2echw==
-  dependencies:
-    commander "^2.20.0"
-    source-map "~0.6.1"
-    source-map-support "~0.5.12"
-
-terser@^4.6.12:
-  version "4.8.0"
-  resolved "https://registry.yarnpkg.com/terser/-/terser-4.8.0.tgz#63056343d7c70bb29f3af665865a46fe03a0df17"
-  integrity sha512-EAPipTNeWsb/3wLPeup1tVPaXfIaU68xMnVdPafIL1TV05OhASArYyIfFvnvJCNrR2NIOvDVNNTFRa+Re2MWyw==
   dependencies:
     commander "^2.20.0"
     source-map "~0.6.1"
