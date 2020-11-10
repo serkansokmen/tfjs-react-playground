@@ -20,7 +20,7 @@
     "eslint-plugin-react-hooks": "4.2.0",
     "formik": "2.2.3",
     "isomorphic-unfetch": "3.1.0",
-    "konva": "7.1.4",
+    "konva": "7.1.5",
     "next": "10.0.1",
     "prop-types": "15.7.2",
     "react": "17.0.1",
