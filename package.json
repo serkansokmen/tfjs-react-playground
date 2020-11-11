@@ -18,7 +18,7 @@
     "dat.gui": "0.7.7",
     "dis-gui": "2.1.0",
     "eslint-plugin-react-hooks": "4.2.0",
-    "formik": "2.2.4",
+    "formik": "2.2.5",
     "isomorphic-unfetch": "3.1.0",
     "konva": "7.1.6",
     "next": "10.0.1",
