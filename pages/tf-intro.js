@@ -13,7 +13,7 @@ function f(x) {
   return f1.add(f2).add(f3).add(x).add(f4)
 }
 
-const TfIntro = () => {
+function TfIntro() {
   const [result, setResult] = useState(null)
 
   // minimize iteratively

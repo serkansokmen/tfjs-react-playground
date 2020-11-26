@@ -1,10 +1,11 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { Formik, Form, Field } from 'formik'
-import * as tf from '@tensorflow/tfjs'
+import * as tf from '@tensorflow/tfjs-core'
+import '@tensorflow/tfjs-backend-webgl'
 import * as tfVis from '@tensorflow/tfjs-vis'
 import fetch from 'isomorphic-unfetch'
 
-export default () => {
+export default function Predict2dData() {
   const [init, setInit] = useState(false)
   const [isTraining, setIsTraining] = useState(false)
   const [data, setData] = useState([])

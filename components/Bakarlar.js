@@ -50,7 +50,7 @@ function reducer(state, action) {
   }
 }
 
-export default () => {
+export default function Bakarlar() {
   const stageRef = useRef()
   const outputCanvasRef = useRef()
   const circleToEye = useRef()

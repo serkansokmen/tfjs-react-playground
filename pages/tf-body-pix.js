@@ -32,7 +32,7 @@ const rainbow = [
   [99, 81, 195],
 ]
 
-const TfBodyPix = () => {
+function TfBodyPix() {
   // const [image, status] = useImage(`./static/images/${imageNames[0]}`, 'Anonymous')
   const [coloredImage, setColoredImage] = useState(null)
   const [net, setNet] = useState(null)
