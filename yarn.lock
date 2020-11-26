@@ -10714,13 +10714,13 @@ react-is@^17.0.1:
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-17.0.1.tgz#5b3531bd76a645a4c9fb6e693ed36419e3301339"
   integrity sha512-NAnt2iGDXohE5LI7uBnLnqvLQMtzhkiAOLXTmv+qnF9Ky7xAPcX8Up/xWIhxvLVGJvuLiNc4xQLtuqDRzb4fSA==
 
-react-konva@17.0.0-0:
-  version "17.0.0-0"
-  resolved "https://registry.yarnpkg.com/react-konva/-/react-konva-17.0.0-0.tgz#b98bb7942c8b1530c083e78e6710ae7650f0bd68"
-  integrity sha512-hOGULvEYfgZMT+9pr/UKccr7geOkz8bcVcDCFaDiUYoeh932i0fwGRQyNBH3LadgIP2mnfvDku9y4s8GcdQP1Q==
+react-konva@17.0.0-rc.1:
+  version "17.0.0-rc.1"
+  resolved "https://registry.yarnpkg.com/react-konva/-/react-konva-17.0.0-rc.1.tgz#e3ed8ceef09e34d9b21d096ddcbe233c90f0579d"
+  integrity sha512-mpBhgZy6q3oL9NRswYUgSNF6jqo3vsQWE0iGwTWiv9jEaz5+zoKc3rNPbWsfj4dqBOJDAGurrm4oVIfYmsfMzg==
   dependencies:
-    react-reconciler "~0.26.0"
-    scheduler "^0.20.0"
+    react-reconciler "~0.26.0-rc.0"
+    scheduler "^0.19.1"
 
 react-no-ssr@1.1.0:
   version "1.1.0"
@@ -10740,7 +10740,7 @@ react-player@2.7.0:
     prop-types "^15.7.2"
     react-fast-compare "^3.0.1"
 
-react-reconciler@~0.26.0:
+react-reconciler@~0.26.0-rc.0:
   version "0.26.1"
   resolved "https://registry.yarnpkg.com/react-reconciler/-/react-reconciler-0.26.1.tgz#860952dd359fd870f94895c254271e3a9de3b2d6"
   integrity sha512-6E/CvH9zcDmHjhiNJlP0qJ8+3ufnY2b5RWs774Uy8XKWN0l6qfnlkz0XnDacxqj2rbJdq76w9dlFXjPPOQrmqA==
@@ -11393,7 +11393,15 @@ saxes@^5.0.0:
   dependencies:
     xmlchars "^2.2.0"
 
-scheduler@^0.20.0, scheduler@^0.20.1:
+scheduler@^0.19.1:
+  version "0.19.1"
+  resolved "https://registry.yarnpkg.com/scheduler/-/scheduler-0.19.1.tgz#4f3e2ed2c1a7d65681f4c854fa8c5a1ccb40f196"
+  integrity sha512-n/zwRWRYSUj0/3g/otKDRPMh6qv2SYMWNq85IEa8iZyAv8od9zDYpGSnpBEjNgcMNq6Scbu5KfIPxNF72R/2EA==
+  dependencies:
+    loose-envify "^1.1.0"
+    object-assign "^4.1.1"
+
+scheduler@^0.20.1:
   version "0.20.1"
   resolved "https://registry.yarnpkg.com/scheduler/-/scheduler-0.20.1.tgz#da0b907e24026b01181ecbc75efdc7f27b5a000c"
   integrity sha512-LKTe+2xNJBNxu/QhHvDR14wUXHRQbVY5ZOYpOGWRzhydZUqrLb2JBvLPY7cAqFmqrWuDED0Mjk7013SZiOz6Bw==
