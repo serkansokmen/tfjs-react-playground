@@ -31,7 +31,7 @@ function reducer(state, action) {
   }
 }
 
-const Drawing = (
+function Drawing(
   {
     width,
     height,
@@ -43,7 +43,7 @@ const Drawing = (
     onUpdate,
   },
   ref
-) => {
+) {
   const [state, dispatch] = useReducer(reducer, initialState)
   const [sampleImage, status] = useImage(sampleImageUrl)
   const imageRef = useRef()

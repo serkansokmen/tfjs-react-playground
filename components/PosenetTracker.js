@@ -1,4 +1,6 @@
 import React, { useReducer, useEffect, useRef } from 'react'
+import '@tensorflow/tfjs-core'
+import '@tensorflow/tfjs-backend-webgl'
 import * as posenet from '@tensorflow-models/posenet'
 import { Stage, Layer } from 'react-konva'
 import Webcam from 'react-webcam'

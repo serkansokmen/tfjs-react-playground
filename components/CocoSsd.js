@@ -1,4 +1,6 @@
 import React, { useReducer, useEffect, useRef } from 'react'
+import '@tensorflow/tfjs-core'
+import '@tensorflow/tfjs-backend-webgl'
 import * as cocoSsd from '@tensorflow-models/coco-ssd'
 import { Stage, Layer, Group, Rect, Text } from 'react-konva'
 import useInterval from '../lib/use-interval'
@@ -34,7 +36,7 @@ function reducer(state, action) {
   }
 }
 
-export default () => {
+function CocoSsd() {
   const [state, dispatch] = useReducer(reducer, initialState)
   const net = useRef(null)
   const webcamRef = useRef()
@@ -153,3 +155,5 @@ export default () => {
     </div>
   )
 }
+
+export default CocoSsd

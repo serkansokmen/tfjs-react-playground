@@ -23,7 +23,7 @@ function createModel() {
   return model
 }
 
-const TfXor = () => {
+function TfXor() {
   const [isTraining, setIsTraining] = useState(false)
   const [result, setResult] = useState(null)
   const model = createModel()

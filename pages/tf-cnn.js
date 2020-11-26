@@ -64,7 +64,7 @@ function createModel() {
   return model
 }
 
-const TfCnn = () => {
+function TfCnn() {
   const [isTraining, setIsTraining] = useState(false)
   const [result, setResult] = useState(null)
 
