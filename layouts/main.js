@@ -2,6 +2,8 @@ import React from 'react'
 import Nav from '../components/nav'
 import Head from 'next/head'
 
+global._babelPolyfill = false
+
 export default function Main({ children }) {
   return (
     <main>
