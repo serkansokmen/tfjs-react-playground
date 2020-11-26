@@ -72,7 +72,7 @@ function TfBodyPix() {
   const handleClick = async () => {
     const snapshot = imageRef.current.getCanvas()
     const segmentation = await net.estimatePersonSegmentation(snapshot)
-    const coloredImage = bodyPix.toColoredPartImageData(segmentation, rainbow)
+    const coloredImage = bodyPix.toColoredPartMask(segmentation, rainbow)
     setColoredImage(coloredImage)
   }
 
