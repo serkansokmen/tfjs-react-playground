@@ -13,7 +13,7 @@ function f(x) {
   return f1.add(f2).add(f3).add(x).add(f4)
 }
 
-export default () => {
+const TfIntro = () => {
   const [result, setResult] = useState(null)
 
   // minimize iteratively
@@ -59,3 +59,5 @@ export default () => {
     </Layout>
   )
 }
+
+export default TfIntro

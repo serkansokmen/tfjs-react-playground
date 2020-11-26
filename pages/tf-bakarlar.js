@@ -4,7 +4,7 @@ import NoSSR from 'react-no-ssr'
 import Layout from '../layouts/main'
 import Bakarlar from '../components/Bakarlar'
 
-export default () => (
+const TfBakarlar = () => (
   <Layout>
     <Head title="Tensorflow Playground / Bakarlar" />
     <NoSSR>
@@ -12,3 +12,5 @@ export default () => (
     </NoSSR>
   </Layout>
 )
+
+export default TfBakarlar

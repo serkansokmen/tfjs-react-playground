@@ -32,14 +32,7 @@ const rainbow = [
   [99, 81, 195],
 ]
 
-// const imageNames = [
-//   'andre-agassi.jpg',
-//   'beautiful-beautiful-girl-beauty.jpg',
-//   'beach-black-pants-black-shirt.jpg',
-//   'stadium.jpg',
-// ]
-
-export default () => {
+const TfBodyPix = () => {
   // const [image, status] = useImage(`./static/images/${imageNames[0]}`, 'Anonymous')
   const [coloredImage, setColoredImage] = useState(null)
   const [net, setNet] = useState(null)
@@ -125,3 +118,12 @@ export default () => {
     </Layout>
   )
 }
+
+// const imageNames = [
+//   'andre-agassi.jpg',
+//   'beautiful-beautiful-girl-beauty.jpg',
+//   'beach-black-pants-black-shirt.jpg',
+//   'stadium.jpg',
+// ]
+
+export default TfBodyPix

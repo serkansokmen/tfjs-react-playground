@@ -64,7 +64,7 @@ function createModel() {
   return model
 }
 
-export default () => {
+const TfCnn = () => {
   const [isTraining, setIsTraining] = useState(false)
   const [result, setResult] = useState(null)
 
@@ -100,3 +100,5 @@ export default () => {
     </Layout>
   )
 }
+
+export default TfCnn
