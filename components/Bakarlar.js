@@ -2,7 +2,7 @@ import React, { useReducer, useEffect, useRef } from 'react'
 import Konva from 'konva'
 import { Stage, Layer, Circle, Image, Group } from 'react-konva'
 import useImage from 'use-image'
-import pix2pix from '../lib/pix2pix'
+// import pix2pix from '../lib/pix2pix'
 import { mapRange } from '../lib/utils'
 import useInterval from '../lib/use-interval'
 import * as dg from 'dis-gui'
@@ -105,6 +105,7 @@ export default function Bakarlar() {
   }, state.updateMilis)
 
   useEffect(() => {
+    const { pix2pix } = window.ml5
     circleToEye.current = pix2pix(
       '/static/models/bakarlar_002_BtoA.pict',
       modelLoaded
