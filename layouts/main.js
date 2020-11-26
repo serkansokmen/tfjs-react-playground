@@ -1,9 +1,16 @@
 import React from 'react'
 import Nav from '../components/nav'
+import Head from 'next/head'
 
 export default function Main({ children }) {
   return (
     <main>
+      <Head>
+        <script
+          src="https://unpkg.com/ml5@0.6.0/dist/ml5.min.js"
+          type="text/javascript"
+        ></script>
+      </Head>
       <Nav />
       {children}
 

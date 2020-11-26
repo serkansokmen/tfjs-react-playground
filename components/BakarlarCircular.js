@@ -105,6 +105,7 @@ export default function BakarlarCircular() {
   }, state.updateMilis)
 
   useEffect(() => {
+    const { pix2pix } = window.ml5
     circleToEye.current = pix2pix(
       '/static/models/bakarlar_002_BtoA.pict',
       modelLoaded
