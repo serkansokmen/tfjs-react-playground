@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { Formik, Form, Field } from 'formik'
-import * as tf from '@tensorflow/tfjs-core'
+import * as tf from '@tensorflow/tfjs'
 import '@tensorflow/tfjs-backend-webgl'
 import * as tfVis from '@tensorflow/tfjs-vis'
 import fetch from 'isomorphic-unfetch'

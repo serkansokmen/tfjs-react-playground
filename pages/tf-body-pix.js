@@ -1,4 +1,6 @@
 import React, { useState, useEffect, createRef } from 'react'
+import '@tensorflow/tfjs-core'
+import '@tensorflow/tfjs-backend-webgl'
 import * as bodyPix from '@tensorflow-models/body-pix'
 import useCanvas from '../lib/use-canvas'
 import Webcam from 'react-webcam'
@@ -69,7 +71,6 @@ function TfBodyPix() {
 
   const handleClick = async () => {
     const snapshot = imageRef.current.getCanvas()
-    debugger
     const segmentation = await net.estimatePersonSegmentation(snapshot)
     const coloredImage = bodyPix.toColoredPartImageData(segmentation, rainbow)
     setColoredImage(coloredImage)
@@ -87,7 +88,7 @@ function TfBodyPix() {
       <div className="container">
         <Webcam
           ref={imageRef}
-          flipHorizontal={false}
+          fliphorizontal={false}
           audio={false}
           width={640}
           height={480}
