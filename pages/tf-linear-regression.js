@@ -4,7 +4,7 @@ import Head from '../components/head'
 import Layout from '../layouts/main'
 import Predict2dData from '../components/Predict2dData'
 
-export default () => {
+const TfLinearRegression = () => {
   return (
     <Layout>
       <Head title="Tensorflow Playground / Make Predictions from 2D Data" />
@@ -14,3 +14,5 @@ export default () => {
     </Layout>
   )
 }
+
+export default TfLinearRegression

@@ -23,7 +23,7 @@ function createModel() {
   return model
 }
 
-export default () => {
+const TfXor = () => {
   const [isTraining, setIsTraining] = useState(false)
   const [result, setResult] = useState(null)
   const model = createModel()
@@ -55,3 +55,5 @@ export default () => {
     </Layout>
   )
 }
+
+export default TfXor
