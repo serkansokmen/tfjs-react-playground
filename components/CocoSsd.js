@@ -57,8 +57,12 @@ function CocoSsd() {
   }, [state.isTrackingEnabled])
 
   const predict = async (input) => {
-    const predictions = await net.current.detect(input)
-    dispatch(['setPredictions', predictions])
+    try {
+      const predictions = await net.current.detect(input)
+      dispatch(['setPredictions', predictions])
+    } catch (e) {
+      console.log(e)
+    }
   }
 
   const renderRect = (prediction, key) => {
