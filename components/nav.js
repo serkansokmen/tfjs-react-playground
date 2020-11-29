@@ -3,14 +3,14 @@ import Link from 'next/link'
 
 const links = [
   { href: '/tf-intro', label: 'Intro' },
-  { href: '/tf-xor', label: 'XOR' },
+  // { href: '/tf-xor', label: 'XOR' },
   // { href: '/tf-cnn', label: 'CNN' },
   // { href: '/tf-body-pix', label: 'Body Pix' },
-  { href: '/tf-lstm?key=oscar-wilde-soul-of-man', label: 'LSTM' },
+  // { href: '/tf-lstm?key=oscar-wilde-soul-of-man', label: 'LSTM' },
   { href: '/tf-posenet', label: 'Posenet' },
   { href: '/tf-coco-ssd', label: 'Coco SSD' },
   { href: '/tf-linear-regression', label: 'Linear Regression' },
-  { href: '/tf-bakarlar', label: 'Bakarlar' },
+  // { href: '/tf-bakarlar', label: 'Bakarlar' },
 ].map((link) => {
   link.key = `nav-link-${link.href}-${link.label}`
   return link

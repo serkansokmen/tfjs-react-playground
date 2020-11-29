@@ -1,6 +1,7 @@
 import React, { useState, useEffect, createRef } from 'react'
 import NoSSR from 'react-no-ssr'
 import * as tf from '@tensorflow/tfjs'
+import '@tensorflow/tfjs-backend-webgl'
 import Head from '../components/head'
 import Layout from '../layouts/main'
 
@@ -13,12 +14,13 @@ const LSTM = ({ query }) => {
   const PREDICT_LEN = 450
 
   async function loadModel(key) {
-    const m = await tf.loadLayersModel(`/static/models/${key}/model.json`)
+    const m = await tf.loadLayersModel(`static/models/${key}/model.json`)
     setIsModelReady(true)
     model.current = m
-    console.log(m, tf)
-    debugger
-    const prediction = model.current.predict(1, 'Lorem ipsum')
+    const prediction = await model.current.predict(
+      new tf.Tensor([1]),
+      'Lorem ipsum'
+    )
     console.log(prediction)
   }
 

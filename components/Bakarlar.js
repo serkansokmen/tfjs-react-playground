@@ -6,6 +6,7 @@ import useImage from 'use-image'
 import { mapRange } from '../lib/utils'
 import useInterval from '../lib/use-interval'
 import * as dg from 'dis-gui'
+import '@tensorflow/tfjs-backend-webgl'
 
 const initialState = {
   SIZE: 256,
@@ -66,7 +67,7 @@ export default function Bakarlar() {
   const predict = (element) => {
     dispatch(['setIsTransfering', true])
 
-    // // Apply pix2pix transformation
+    // Apply pix2pix transformation
     circleToEye.current.transfer(element, (result) => {
       dispatch(['setIsTransfering', false])
       dispatch(['setResult', result])
