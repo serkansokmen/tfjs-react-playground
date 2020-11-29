@@ -18,7 +18,7 @@ describe('Pages', () => {
 
   it('Intro page should train on function f(x) = x⁶+2x⁴+3x²+x+1.', () => {
     cy.contains('a', 'Intro').first().click()
-    cy.wait(2000)
+    cy.wait(6000)
     cy.contains('f(x) = x⁶+2x⁴+3x²+x+1.')
     cy.get('input[name="epochs"]').clear().type(100)
     cy.get('input[name="learningRate"]').clear().type(0.95)
