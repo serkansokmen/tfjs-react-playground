@@ -4,7 +4,7 @@ import CocoSsd from '../components/CocoSsd'
 import Head from '../components/head'
 import Layout from '../layouts/main'
 
-export default () => (
+const TfCocoSsd = () => (
   <Layout>
     <Head title="Tensorflow Playground / Coco SSD" />
     <NoSSR>
@@ -12,3 +12,5 @@ export default () => (
     </NoSSR>
   </Layout>
 )
+
+export default TfCocoSsd

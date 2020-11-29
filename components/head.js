@@ -6,7 +6,7 @@ const defaultDescription = ''
 const defaultOGURL = ''
 const defaultOGImage = ''
 
-const Head = props => (
+const Head = (props) => (
   <NextHead>
     <meta charSet="UTF-8" />
     <title>{props.title || ''}</title>
@@ -31,6 +31,7 @@ const Head = props => (
     <meta property="og:image" content={props.ogImage || defaultOGImage} />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
+    {props.children}
   </NextHead>
 )
 

@@ -2,10 +2,11 @@ import React, { useReducer, useEffect, useRef } from 'react'
 import Konva from 'konva'
 import { Stage, Layer, Circle, Image, Group } from 'react-konva'
 import useImage from 'use-image'
-import pix2pix from '../lib/pix2pix'
+// import pix2pix from '../lib/pix2pix'
 import { mapRange } from '../lib/utils'
 import useInterval from '../lib/use-interval'
 import * as dg from 'dis-gui'
+import '@tensorflow/tfjs-backend-webgl'
 
 const initialState = {
   SIZE: 256,
@@ -50,7 +51,7 @@ function reducer(state, action) {
   }
 }
 
-export default () => {
+export default function Bakarlar() {
   const stageRef = useRef()
   const outputCanvasRef = useRef()
   const circleToEye = useRef()
@@ -63,17 +64,17 @@ export default () => {
     dispatch(['setIsReady', true])
   }
 
-  const predict = element => {
+  const predict = (element) => {
     dispatch(['setIsTransfering', true])
 
-    // // Apply pix2pix transformation
-    circleToEye.current.transfer(element, result => {
+    // Apply pix2pix transformation
+    circleToEye.current.transfer(element, (result) => {
       dispatch(['setIsTransfering', false])
       dispatch(['setResult', result])
     })
   }
 
-  const handleMouseMove = e => {
+  const handleMouseMove = (e) => {
     const { OUTER_RING_SIZE, SIZE } = state
     const x =
       OUTER_RING_SIZE / 2 +
@@ -97,7 +98,7 @@ export default () => {
       width: state.SIZE,
       height: state.SIZE,
       pixelRatio: 1,
-      callback: input => {
+      callback: (input) => {
         // dispatch(['setInputReady', true])
       },
     })
@@ -105,6 +106,7 @@ export default () => {
   }, state.updateMilis)
 
   useEffect(() => {
+    const { pix2pix } = window.ml5
     circleToEye.current = pix2pix(
       '/static/models/bakarlar_002_BtoA.pict',
       modelLoaded
@@ -178,7 +180,7 @@ export default () => {
           <dg.Checkbox
             label="enabled"
             checked={state.isTrackingEnabled}
-            onFinishChange={val => dispatch(['setIsTrackingEnabled', val])}
+            onFinishChange={(val) => dispatch(['setIsTrackingEnabled', val])}
           />
           <dg.Number
             label="update interval"
@@ -186,7 +188,7 @@ export default () => {
             min={10}
             max={250}
             step={10}
-            onChange={val => dispatch(['setUpdateMilis', val])}
+            onChange={(val) => dispatch(['setUpdateMilis', val])}
           />
           <dg.Number
             label="outer ring size"
@@ -194,7 +196,7 @@ export default () => {
             min={10}
             max={state.SIZE}
             step={1}
-            onChange={val => dispatch(['setOuterRingSize', val])}
+            onChange={(val) => dispatch(['setOuterRingSize', val])}
           />
           <dg.Number
             label="pupil size"
@@ -202,7 +204,7 @@ export default () => {
             min={10}
             max={state.OUTER_RING_SIZE / 2}
             step={1}
-            onChange={val => dispatch(['setPupilSize', val])}
+            onChange={(val) => dispatch(['setPupilSize', val])}
           />
           <dg.Number
             label="input noise"
@@ -210,7 +212,7 @@ export default () => {
             min={0}
             max={10}
             step={1}
-            onChange={val => dispatch(['setNoise', val])}
+            onChange={(val) => dispatch(['setNoise', val])}
           />
           <dg.Number
             label="input blur"
@@ -218,7 +220,7 @@ export default () => {
             min={0}
             max={10}
             step={1}
-            onChange={val => dispatch(['setBlur', val])}
+            onChange={(val) => dispatch(['setBlur', val])}
           />
         </dg.Folder>
       </dg.GUI>

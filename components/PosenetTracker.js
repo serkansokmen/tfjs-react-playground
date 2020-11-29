@@ -1,4 +1,6 @@
 import React, { useReducer, useEffect, useRef } from 'react'
+import '@tensorflow/tfjs-core'
+import '@tensorflow/tfjs-backend-webgl'
 import * as posenet from '@tensorflow-models/posenet'
 import { Stage, Layer } from 'react-konva'
 import Webcam from 'react-webcam'
@@ -100,12 +102,12 @@ const fetchPoses = async ({
       scoreThreshold,
       nmsRadius
     )
-    const foundPoses = poses.filter(pose => pose.score > 0.5)
+    const foundPoses = poses.filter((pose) => pose.score > 0.5)
     return foundPoses
   }
 }
 
-const PosenetTracker = props => {
+const PosenetTracker = (props) => {
   // Net
   const net = useRef(null)
 
@@ -178,7 +180,7 @@ const PosenetTracker = props => {
     dispatch(['setMessage', `Found ${poses.length} poses`])
   }, updateRateMilis)
 
-  const handleVideoError = error => {
+  const handleVideoError = (error) => {
     dispatch(['useWebcam', true])
   }
 
@@ -257,7 +259,7 @@ const PosenetTracker = props => {
           <dg.Checkbox
             label="enabled"
             checked={isTrackingEnabled}
-            onFinishChange={val => dispatch(['isTrackingEnabled', val])}
+            onFinishChange={(val) => dispatch(['isTrackingEnabled', val])}
           />
           <dg.Text label={`${poses.length} poses found`} />
           <dg.Number
@@ -266,18 +268,18 @@ const PosenetTracker = props => {
             min={10}
             max={250}
             step={10}
-            onChange={val => dispatch(['updateRateMilis', val])}
+            onChange={(val) => dispatch(['updateRateMilis', val])}
           />
           <dg.Checkbox
             label="flip horizontal"
             checked={flipHorizontal}
-            onFinishChange={val => dispatch(['flipHorizontal', val])}
+            onFinishChange={(val) => dispatch(['flipHorizontal', val])}
           />
           <dg.Select
             label="output stride"
             value={outputStride}
             options={[8, 16, 32]}
-            onFinishChange={val => dispatch(['outputStride', val * 1])}
+            onFinishChange={(val) => dispatch(['outputStride', val * 1])}
           />
           <dg.Number
             label="max poses"
@@ -285,14 +287,14 @@ const PosenetTracker = props => {
             min={1}
             max={10}
             step={1}
-            onFinishChange={val => dispatch(['maxPoseDetections', val])}
+            onFinishChange={(val) => dispatch(['maxPoseDetections', val])}
           />
           <dg.Number
             label="score threshold"
             value={scoreThreshold}
             min={0.01}
             max={1}
-            onFinishChange={val => dispatch(['scoreThreshold', val])}
+            onFinishChange={(val) => dispatch(['scoreThreshold', val])}
           />
           <dg.Number
             label="nms radius"
@@ -300,7 +302,7 @@ const PosenetTracker = props => {
             min={1}
             max={100}
             step={1}
-            onFinishChange={val => dispatch(['nmsRadius', val])}
+            onFinishChange={(val) => dispatch(['nmsRadius', val])}
           />
         </dg.Folder>
       </dg.GUI>

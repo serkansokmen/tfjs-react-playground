@@ -3,7 +3,7 @@ import { Layer, Circle, Line } from 'react-konva'
 
 const Skeleton = ({ keypoints }) => {
   const renderCircleForKeypoint = (key, color = 'blue', radius = 3) => {
-    const keypoint = keypoints.find(kp => kp.part === key)
+    const keypoint = keypoints.find((kp) => kp.part === key)
     return (
       <Circle
         key={key}
@@ -16,8 +16,8 @@ const Skeleton = ({ keypoints }) => {
   }
 
   const renderLineForPair = (firstKey, secondKey, color = 'green') => {
-    const first = keypoints.find(kp => kp.part === firstKey)
-    const second = keypoints.find(kp => kp.part === secondKey)
+    const first = keypoints.find((kp) => kp.part === firstKey)
+    const second = keypoints.find((kp) => kp.part === secondKey)
     let points = []
     if (first && second) {
       points = [
@@ -32,7 +32,7 @@ const Skeleton = ({ keypoints }) => {
 
   return (
     <>
-      {keypoints.map(kp => {
+      {keypoints.map((kp) => {
         switch (kp.part) {
           case 'leftEye':
           case 'rightEye':

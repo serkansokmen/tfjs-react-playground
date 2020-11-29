@@ -1,4 +1,6 @@
 import React, { useState, useEffect, createRef } from 'react'
+import '@tensorflow/tfjs-core'
+import '@tensorflow/tfjs-backend-webgl'
 import * as bodyPix from '@tensorflow-models/body-pix'
 import useCanvas from '../lib/use-canvas'
 import Webcam from 'react-webcam'
@@ -32,14 +34,7 @@ const rainbow = [
   [99, 81, 195],
 ]
 
-// const imageNames = [
-//   'andre-agassi.jpg',
-//   'beautiful-beautiful-girl-beauty.jpg',
-//   'beach-black-pants-black-shirt.jpg',
-//   'stadium.jpg',
-// ]
-
-export default () => {
+function TfBodyPix() {
   // const [image, status] = useImage(`./static/images/${imageNames[0]}`, 'Anonymous')
   const [coloredImage, setColoredImage] = useState(null)
   const [net, setNet] = useState(null)
@@ -49,7 +44,7 @@ export default () => {
     setNet(net)
   }
 
-  const canvasRef = useCanvas(gl => {
+  const canvasRef = useCanvas((gl) => {
     // console.log(gl)
     // gl.clearColor(0.0, 0.0, 0.0, 1.0);
     // gl.clearDepth(1.0);
@@ -76,9 +71,8 @@ export default () => {
 
   const handleClick = async () => {
     const snapshot = imageRef.current.getCanvas()
-    debugger
     const segmentation = await net.estimatePersonSegmentation(snapshot)
-    const coloredImage = bodyPix.toColoredPartImageData(segmentation, rainbow)
+    const coloredImage = bodyPix.toColoredPartMask(segmentation, rainbow)
     setColoredImage(coloredImage)
   }
 
@@ -94,7 +88,7 @@ export default () => {
       <div className="container">
         <Webcam
           ref={imageRef}
-          flipHorizontal={false}
+          fliphorizontal={false}
           audio={false}
           width={640}
           height={480}
@@ -125,3 +119,12 @@ export default () => {
     </Layout>
   )
 }
+
+// const imageNames = [
+//   'andre-agassi.jpg',
+//   'beautiful-beautiful-girl-beauty.jpg',
+//   'beach-black-pants-black-shirt.jpg',
+//   'stadium.jpg',
+// ]
+
+export default TfBodyPix

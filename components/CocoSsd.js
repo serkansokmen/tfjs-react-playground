@@ -1,4 +1,6 @@
 import React, { useReducer, useEffect, useRef } from 'react'
+import '@tensorflow/tfjs-core'
+import '@tensorflow/tfjs-backend-webgl'
 import * as cocoSsd from '@tensorflow-models/coco-ssd'
 import { Stage, Layer, Group, Rect, Text } from 'react-konva'
 import useInterval from '../lib/use-interval'
@@ -34,7 +36,7 @@ function reducer(state, action) {
   }
 }
 
-export default () => {
+function CocoSsd() {
   const [state, dispatch] = useReducer(reducer, initialState)
   const net = useRef(null)
   const webcamRef = useRef()
@@ -49,12 +51,18 @@ export default () => {
   }, [])
 
   useEffect(() => {
-    if (!state.isTrackingEnabled) { dispatch(['setPredictions', []])}
+    if (!state.isTrackingEnabled) {
+      dispatch(['setPredictions', []])
+    }
   }, [state.isTrackingEnabled])
 
-  const predict = async input => {
-    const predictions = await net.current.detect(input)
-    dispatch(['setPredictions', predictions])
+  const predict = async (input) => {
+    try {
+      const predictions = await net.current.detect(input)
+      dispatch(['setPredictions', predictions])
+    } catch (e) {
+      console.log(e)
+    }
   }
 
   const renderRect = (prediction, key) => {
@@ -67,10 +75,12 @@ export default () => {
           fill="transparent"
           stroke="#00ff00"
         />
-        <Text offsetY={16} 
-          text={`${prediction.class} (${Math.round(prediction.score * 100)}%)`} 
+        <Text
+          offsetY={16}
+          text={`${prediction.class} (${Math.round(prediction.score * 100)}%)`}
           fill="#ffffff"
-          fontColor="#000000"/>
+          fontColor="#000000"
+        />
       </Group>
     )
   }
@@ -86,7 +96,7 @@ export default () => {
     'Loading...'
   ) : (
     <div>
-      <div style={{position: 'relative'}}>
+      <div style={{ position: 'relative' }}>
         <Webcam
           ref={webcamRef}
           flipHorizontal={false}
@@ -133,7 +143,7 @@ export default () => {
           <dg.Checkbox
             label="enabled"
             checked={state.isTrackingEnabled}
-            onFinishChange={val => dispatch(['setIsTrackingEnabled', val])}
+            onFinishChange={(val) => dispatch(['setIsTrackingEnabled', val])}
           />
           <dg.Text label={`${state.predictions.length} predictions found`} />
           <dg.Number
@@ -142,10 +152,12 @@ export default () => {
             min={10}
             max={250}
             step={10}
-            onChange={val => dispatch(['setUpdateMilis', val])}
+            onChange={(val) => dispatch(['setUpdateMilis', val])}
           />
         </dg.Folder>
       </dg.GUI>
     </div>
   )
 }
+
+export default CocoSsd

@@ -55,7 +55,7 @@ class ThreeScene extends React.Component {
     let mesh
     loader.load(
       './static/models/brown_eyeball/scene.gltf',
-      (gltf => {
+      ((gltf) => {
         mesh = gltf.scene.children[0]
         // mesh.rotateOnAxis(new THREE.Vector3(1, 0, 0), -90)
         mesh.castShadow = true
