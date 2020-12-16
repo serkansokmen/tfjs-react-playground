@@ -15,7 +15,7 @@
     "@tensorflow-models/posenet": "2.2.1",
     "@tensorflow/tfjs": "2.7.0",
     "@tensorflow/tfjs-backend-cpu": "2.8.0",
-    "@tensorflow/tfjs-backend-webgl": "2.7.0",
+    "@tensorflow/tfjs-backend-webgl": "2.8.0",
     "@tensorflow/tfjs-vis": "1.4.3",
     "@zeit/next-css": "1.0.1",
     "array-to-image": "1.0.0",
