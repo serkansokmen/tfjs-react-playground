@@ -1778,6 +1778,18 @@
     "@types/webgl2" "0.0.5"
     seedrandom "2.4.3"
 
+"@tensorflow/tfjs-backend-webgl@2.8.1":
+  version "2.8.1"
+  resolved "https://registry.yarnpkg.com/@tensorflow/tfjs-backend-webgl/-/tfjs-backend-webgl-2.8.1.tgz#945516192c22f126c2a4463bb6a9358be6fecfa3"
+  integrity sha512-f0Le9LFW8z20Oyhb0lLFubPgDd6Yb6ObHg5YgVFgXBLmdHV8HHdM+zLHipZRz0AzmTSHrZdRYhnKYvJsb9ktiQ==
+  dependencies:
+    "@tensorflow/tfjs-backend-cpu" "2.8.1"
+    "@types/offscreencanvas" "~2019.3.0"
+    "@types/seedrandom" "2.4.27"
+    "@types/webgl-ext" "0.0.30"
+    "@types/webgl2" "0.0.5"
+    seedrandom "2.4.3"
+
 "@tensorflow/tfjs-converter@2.7.0":
   version "2.7.0"
   resolved "https://registry.yarnpkg.com/@tensorflow/tfjs-converter/-/tfjs-converter-2.7.0.tgz#24acdd8964b264ba4839f7a3466f8bacafb98c13"
