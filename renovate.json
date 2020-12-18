@@ -15,6 +15,23 @@
       "depTypeList": ["devDependencies"],
       "updateTypes": ["minor"],
       "automerge": true
+    },
+    {
+      "packageNames": [
+        "@tensorflow/tfjs",
+        "@tensorflow/tfjs-backend-cpu",
+        "@tensorflow/tfjs-backend-webgl",
+        "@tensorflow/tfjs-vis"
+      ],
+      "groupName": "@tensorflow"
+    },
+    {
+      "packageNames": [
+        "@tensorflow-models/body-pix",
+        "@tensorflow-models/coco-ssd",
+        "@tensorflow-models/posenet"
+      ],
+      "groupName": "@tensorflow-models"
     }
   ]
 }
