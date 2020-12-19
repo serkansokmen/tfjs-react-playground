@@ -1,6 +1,6 @@
 {
   "name": "tfjs-react-playground",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "scripts": {
     "dev": "next",
     "build": "next build",
@@ -11,11 +11,11 @@
   },
   "dependencies": {
     "@tensorflow-models/body-pix": "2.0.5",
-    "@tensorflow-models/coco-ssd": "2.1.0",
+    "@tensorflow-models/coco-ssd": "2.2.1",
     "@tensorflow-models/posenet": "2.2.1",
-    "@tensorflow/tfjs": "2.7.0",
-    "@tensorflow/tfjs-backend-cpu": "2.7.0",
-    "@tensorflow/tfjs-backend-webgl": "2.7.0",
+    "@tensorflow/tfjs": "2.8.1",
+    "@tensorflow/tfjs-backend-cpu": "2.8.1",
+    "@tensorflow/tfjs-backend-webgl": "2.8.1",
     "@tensorflow/tfjs-vis": "1.4.3",
     "@zeit/next-css": "1.0.1",
     "array-to-image": "1.0.0",
@@ -23,16 +23,16 @@
     "dat.gui": "0.7.7",
     "dis-gui": "2.1.0",
     "eslint-plugin-react-hooks": "4.2.0",
-    "formik": "2.2.5",
+    "formik": "2.2.6",
     "isomorphic-unfetch": "3.1.0",
-    "konva": "7.2.0",
+    "konva": "7.2.2",
     "next": "10.0.3",
     "prop-types": "15.7.2",
     "react": "17.0.1",
     "react-dom": "17.0.1",
     "react-konva": "17.0.0-rc.1",
     "react-no-ssr": "1.1.0",
-    "react-player": "2.7.0",
+    "react-player": "2.7.2",
     "react-scripts": "4.0.1",
     "react-spring": "8.0.27",
     "react-webcam": "5.2.2",
@@ -43,10 +43,10 @@
     "victor": "1.1.0"
   },
   "devDependencies": {
-    "cypress": "6.0.0",
-    "husky": "4.3.0",
-    "lint-staged": "10.5.2",
-    "prettier": "2.2.0"
+    "cypress": "6.1.0",
+    "husky": "4.3.6",
+    "lint-staged": "10.5.3",
+    "prettier": "2.2.1"
   },
   "lint-staged": {
     "pages/**/*.{js,jsx,json,scss,css}": [

@@ -24,12 +24,12 @@ describe('Pages', () => {
     cy.get('input[name="learningRate"]').clear().type(0.95)
     cy.contains('button[type="submit"]', 'Train').as('submit')
     cy.get('@submit').click()
-    cy.contains('Tensor -0.18038426339626312')
+    cy.contains('Tensor ')
 
     cy.get('input[name="epochs"]').clear().type(50)
     cy.get('input[name="learningRate"]').clear().type(0.9)
     cy.get('@submit').click()
-    cy.contains('Tensor -0.31614893674850464')
+    cy.contains('Tensor ')
   })
 
   it('Has a working Posenet page', () => {
