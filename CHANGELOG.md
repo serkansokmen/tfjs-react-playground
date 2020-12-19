@@ -2,7 +2,33 @@
 
 ## [Unreleased](https://github.com/serkansokmen/tfjs-react-playground/tree/HEAD)
 
-[Full Changelog](https://github.com/serkansokmen/tfjs-react-playground/compare/8ecfc8425b0d059719de31686d355518d05dfb22...HEAD)
+[Full Changelog](https://github.com/serkansokmen/tfjs-react-playground/compare/initial-pages...HEAD)
+
+**Merged pull requests:**
+
+- Update dependency konva to v7.2.2 [\#171](https://github.com/serkansokmen/tfjs-react-playground/pull/171) ([renovate[bot]](https://github.com/apps/renovate))
+- Update @tensorflow to v2.8.1 [\#170](https://github.com/serkansokmen/tfjs-react-playground/pull/170) ([renovate[bot]](https://github.com/apps/renovate))
+- Configure renovate tfjs models [\#169](https://github.com/serkansokmen/tfjs-react-playground/pull/169) ([serkansokmen](https://github.com/serkansokmen))
+- Update dependency @tensorflow/tfjs-backend-cpu to v2.8.1 [\#166](https://github.com/serkansokmen/tfjs-react-playground/pull/166) ([renovate[bot]](https://github.com/apps/renovate))
+- Update dependency react-player to v2.7.2 [\#165](https://github.com/serkansokmen/tfjs-react-playground/pull/165) ([renovate[bot]](https://github.com/apps/renovate))
+- Update dependency @tensorflow/tfjs-backend-cpu to v2.8.0 [\#163](https://github.com/serkansokmen/tfjs-react-playground/pull/163) ([renovate[bot]](https://github.com/apps/renovate))
+- Update dependency husky to v4.3.6 [\#161](https://github.com/serkansokmen/tfjs-react-playground/pull/161) ([renovate[bot]](https://github.com/apps/renovate))
+- Lock file maintenance [\#160](https://github.com/serkansokmen/tfjs-react-playground/pull/160) ([renovate[bot]](https://github.com/apps/renovate))
+- Update dependency formik to v2.2.6 [\#159](https://github.com/serkansokmen/tfjs-react-playground/pull/159) ([renovate[bot]](https://github.com/apps/renovate))
+- Update dependency cypress to v6.1.0 [\#158](https://github.com/serkansokmen/tfjs-react-playground/pull/158) ([renovate[bot]](https://github.com/apps/renovate))
+- Update dependency konva to v7.2.1 [\#157](https://github.com/serkansokmen/tfjs-react-playground/pull/157) ([renovate[bot]](https://github.com/apps/renovate))
+- Update dependency husky to v4.3.5 [\#156](https://github.com/serkansokmen/tfjs-react-playground/pull/156) ([renovate[bot]](https://github.com/apps/renovate))
+- Update dependency husky to v4.3.4 [\#155](https://github.com/serkansokmen/tfjs-react-playground/pull/155) ([renovate[bot]](https://github.com/apps/renovate))
+- Lock file maintenance [\#154](https://github.com/serkansokmen/tfjs-react-playground/pull/154) ([renovate[bot]](https://github.com/apps/renovate))
+- Update dependency lint-staged to v10.5.3 [\#153](https://github.com/serkansokmen/tfjs-react-playground/pull/153) ([renovate[bot]](https://github.com/apps/renovate))
+- Update dependency @tensorflow-models/coco-ssd to v2.2.1 [\#152](https://github.com/serkansokmen/tfjs-react-playground/pull/152) ([renovate[bot]](https://github.com/apps/renovate))
+- Update dependency cypress to v6.0.1 [\#150](https://github.com/serkansokmen/tfjs-react-playground/pull/150) ([renovate[bot]](https://github.com/apps/renovate))
+- Update dependency prettier to v2.2.1 [\#149](https://github.com/serkansokmen/tfjs-react-playground/pull/149) ([renovate[bot]](https://github.com/apps/renovate))
+- Lock file maintenance [\#148](https://github.com/serkansokmen/tfjs-react-playground/pull/148) ([renovate[bot]](https://github.com/apps/renovate))
+
+## [initial-pages](https://github.com/serkansokmen/tfjs-react-playground/tree/initial-pages) (2020-11-29)
+
+[Full Changelog](https://github.com/serkansokmen/tfjs-react-playground/compare/8ecfc8425b0d059719de31686d355518d05dfb22...initial-pages)
 
 **Merged pull requests:**
 
