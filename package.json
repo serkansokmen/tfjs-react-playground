@@ -38,7 +38,7 @@
     "react-webcam": "5.2.2",
     "three": "0.123.0",
     "three-gltf-loader": "1.111.0",
-    "use-image": "1.0.6",
+    "use-image": "1.0.7",
     "vega-functions": "5.8.0",
     "victor": "1.1.0"
   },
