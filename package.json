@@ -39,7 +39,7 @@
     "three": "0.123.0",
     "three-gltf-loader": "1.111.0",
     "use-image": "1.0.7",
-    "vega-functions": "5.8.0",
+    "vega-functions": "5.10.0",
     "victor": "1.1.0"
   },
   "devDependencies": {
