@@ -1743,10 +1743,10 @@
   resolved "https://registry.yarnpkg.com/@tensorflow-models/coco-ssd/-/coco-ssd-2.2.1.tgz#2fd5f778e4cc456e8c1da677a0d503d9245a7d5e"
   integrity sha512-jhtG9O+9JRoliRwVwCbDURfrs+ibpqh5ClROZZiFRQz6P0d78b7tfyffCRFCwMTMuIEnSLVZO3I3XlwpWW0NFw==
 
-"@tensorflow-models/posenet@2.2.1":
-  version "2.2.1"
-  resolved "https://registry.yarnpkg.com/@tensorflow-models/posenet/-/posenet-2.2.1.tgz#2f0a68d909842f59eec195f23c6f3d4cebc53fa8"
-  integrity sha512-n9/g6DfjAyrBTf/zt1haRCyWsgALxUCzg9/Ks3Y2mbYavRZVSCSTRPy/qlE5Hr4tLfyckGfDN14zmGTthNcg/g==
+"@tensorflow-models/posenet@2.2.2":
+  version "2.2.2"
+  resolved "https://registry.yarnpkg.com/@tensorflow-models/posenet/-/posenet-2.2.2.tgz#2abcfa33b43892135d232c9c4408a38cc8f74ba6"
+  integrity sha512-0SXIksRet/IdX7WVH+JSD6W3upkGHix1hwtd3xykIoIMGR7zQ4SC5+wZcNt9ofASyxNYQoI+tUULUo4LNw0c3w==
 
 "@tensorflow/tfjs-backend-cpu@3.0.0":
   version "3.0.0"
