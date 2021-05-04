@@ -1857,10 +1857,10 @@
     "@svgr/plugin-svgo" "^5.5.0"
     loader-utils "^2.0.0"
 
-"@tensorflow-models/body-pix@2.1.0":
-  version "2.1.0"
-  resolved "https://registry.yarnpkg.com/@tensorflow-models/body-pix/-/body-pix-2.1.0.tgz#46c50d2cd8c0d82ee3e16db5757bf95222ad31d7"
-  integrity sha512-HSO7Cic8WvinJRiknPvjtL1Dm7bYpRfP8Ln1iPxR+ATxihylaZf5XatNDp1Cmv5qii1LyxWfzvKzcvin7WKQ5Q==
+"@tensorflow-models/body-pix@2.2.0":
+  version "2.2.0"
+  resolved "https://registry.yarnpkg.com/@tensorflow-models/body-pix/-/body-pix-2.2.0.tgz#96269095f35fb52fdf8529a81f59b97366f12173"
+  integrity sha512-e8PEf8xWlWhXJtGvlTQpdRyUuDXKAFJT/f8SWiBfvim5BAUyFp2dTeVV3gjDDp8MUEo7T3lofTZUexy/aG4YEA==
 
 "@tensorflow-models/coco-ssd@2.2.2":
   version "2.2.2"
