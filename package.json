@@ -43,7 +43,7 @@
     "victor": "1.1.0"
   },
   "devDependencies": {
-    "cypress": "8.4.1",
+    "cypress": "8.7.0",
     "husky": "7.0.2",
     "lint-staged": "11.1.2",
     "prettier": "2.4.1"
