@@ -3,7 +3,7 @@ import Nav from '../components/nav'
 
 global._babelPolyfill = false
 
-export default function Main({ children }) {
+function Main({ children }) {
   return (
     <main>
       <Nav />
@@ -28,3 +28,5 @@ export default function Main({ children }) {
     </main>
   )
 }
+
+export default Main
