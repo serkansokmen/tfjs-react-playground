@@ -1,4 +1,4 @@
-keras==2.6.0
+keras==2.15.0
 tensorflow
 Pillow
 coremltools
