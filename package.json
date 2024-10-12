@@ -20,7 +20,7 @@
     "@zeit/next-css": "1.0.1",
     "array-to-image": "1.0.0",
     "classnames": "2.3.1",
-    "dat.gui": "0.7.7",
+    "dat.gui": "0.7.9",
     "dis-gui": "2.1.0",
     "eslint-plugin-react-hooks": "4.2.0",
     "formik": "2.2.9",
