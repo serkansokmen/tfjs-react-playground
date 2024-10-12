@@ -24,7 +24,7 @@
     "dis-gui": "2.1.0",
     "eslint-plugin-react-hooks": "4.2.0",
     "formik": "2.2.9",
-    "isomorphic-unfetch": "3.1.0",
+    "isomorphic-unfetch": "4.0.2",
     "konva": "7.2.5",
     "next": "12.1.0",
     "prop-types": "15.7.2",
