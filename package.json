@@ -33,7 +33,7 @@
     "react-konva": "17.0.0-rc.1",
     "react-no-ssr": "1.1.0",
     "react-player": "2.9.0",
-    "react-scripts": "4.0.3",
+    "react-scripts": "5.0.1",
     "react-spring": "9.2.4",
     "react-webcam": "6.0.0",
     "three": "0.137.0",
