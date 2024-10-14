@@ -1,3 +1,4 @@
+// tf-body-pix/pages/client.tsx
 'use client'
 
 import { Button } from '@/components/ui/button'
@@ -55,9 +56,7 @@ export default function BodyPixComponent() {
 
   return (
     <div className="container mx-auto p-4">
-      <h1 className="text-2xl font-bold mb-4">
-        Tensorflow Playground / Body Pix
-      </h1>
+      <h1 className="text-2xl font-bold mb-4">Tensorflow Playground / Body Pix</h1>
       <Card>
         <CardHeader>
           <CardTitle>Body Segmentation</CardTitle>

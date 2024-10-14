@@ -1,3 +1,4 @@
+// tf-posenet/pages/client.tsx
 'use client'
 
 import { Button } from '@/components/ui/button'
@@ -123,13 +124,7 @@ interface SkeletonProps {
 
 const Skeleton: React.FC<SkeletonProps> = ({ keypoints }) => {
   const drawLine = (kp1: Keypoint, kp2: Keypoint) => {
-    return (
-      <Line
-        points={[kp1.x, kp1.y, kp2.x, kp2.y]}
-        stroke="#00F"
-        strokeWidth={2}
-      />
-    )
+    return <Line points={[kp1.x, kp1.y, kp2.x, kp2.y]} stroke="#00F" strokeWidth={2} />
   }
 
   const connections = [
@@ -162,13 +157,7 @@ const Skeleton: React.FC<SkeletonProps> = ({ keypoints }) => {
         return null
       })}
       {keypoints.map((keypoint, index) => (
-        <Circle
-          key={index}
-          x={keypoint.x}
-          y={keypoint.y}
-          radius={3}
-          fill="#F00"
-        />
+        <Circle key={index} x={keypoint.x} y={keypoint.y} radius={3} fill="#F00" />
       ))}
     </>
   )
@@ -249,9 +238,7 @@ export default function PoseDetector() {
 
   return (
     <div className="container mx-auto p-4">
-      <h1 className="text-2xl font-bold mb-4">
-        Tensorflow Playground / Pose Detection
-      </h1>
+      <h1 className="text-2xl font-bold mb-4">Tensorflow Playground / Pose Detection</h1>
       <div className="relative mb-4">
         {state.useWebcam ? (
           <Webcam
@@ -322,9 +309,7 @@ export default function PoseDetector() {
           <div>
             <h3 className="font-semibold mb-2">Video Source</h3>
             <Button
-              onClick={() =>
-                dispatch({ type: 'setUseWebcam', payload: !state.useWebcam })
-              }
+              onClick={() => dispatch({ type: 'setUseWebcam', payload: !state.useWebcam })}
             >
               {state.useWebcam ? 'Use Video' : 'Use Webcam'}
             </Button>

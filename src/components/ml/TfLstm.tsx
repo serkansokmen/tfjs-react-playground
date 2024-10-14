@@ -1,3 +1,4 @@
+// tf-lstm/pages/client.tsx
 'use client'
 
 import { Button } from '@/components/ui/button'
@@ -97,9 +98,7 @@ export default function LSTM({ modelKey }: LSTMProps) {
               )}
             </div>
           )}
-          {error && (
-            <pre className="bg-red-100 p-2 rounded text-red-500">{error}</pre>
-          )}
+          {error && <pre className="bg-red-100 p-2 rounded text-red-500">{error}</pre>}
         </CardContent>
       </Card>
     </div>

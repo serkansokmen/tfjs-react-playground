@@ -1,3 +1,4 @@
+// tf-cnn/pages/client.tsx
 'use client'
 
 import React, { useState, useEffect } from 'react'
@@ -108,9 +109,7 @@ export default function TfCnn() {
               Training...
             </div>
           ) : result ? (
-            <pre className="bg-gray-100 p-2 rounded overflow-auto max-h-60">
-              {result}
-            </pre>
+            <pre className="bg-gray-100 p-2 rounded overflow-auto max-h-60">{result}</pre>
           ) : (
             <p>Model not trained yet</p>
           )}

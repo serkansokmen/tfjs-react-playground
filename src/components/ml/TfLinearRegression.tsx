@@ -1,3 +1,4 @@
+// tf-linear-regression/pages/client.tsx
 'use client'
 
 import { Button } from '@/components/ui/button'
@@ -84,9 +85,7 @@ function Predict2dData() {
 
   async function getData() {
     try {
-      const req = await fetch(
-        'https://storage.googleapis.com/tfjs-tutorials/carsData.json'
-      )
+      const req = await fetch('https://storage.googleapis.com/tfjs-tutorials/carsData.json')
       const jsonData = (await req.json()) as CarType[]
       const cleaned = jsonData
         .map((d) => ({
@@ -123,12 +122,8 @@ function Predict2dData() {
       const labelMax = labelTensor.max()
       const labelMin = labelTensor.min()
 
-      const normalizedInputs = inputTensor
-        .sub(inputMin)
-        .div(inputMax.sub(inputMin))
-      const normalizedLabels = labelTensor
-        .sub(labelMin)
-        .div(labelMax.sub(labelMin))
+      const normalizedInputs = inputTensor.sub(inputMin).div(inputMax.sub(inputMin))
+      const normalizedLabels = labelTensor.sub(labelMin).div(labelMax.sub(labelMin))
 
       return {
         inputs: normalizedInputs,
@@ -163,11 +158,10 @@ function Predict2dData() {
       batchSize,
       epochs,
       shuffle: true,
-      callbacks: show.fitCallbacks(
-        { name: 'Training Performance' },
-        ['loss', 'mse'],
-        { height: 200, callbacks: ['onEpochEnd'] }
-      ),
+      callbacks: show.fitCallbacks({ name: 'Training Performance' }, ['loss', 'mse'], {
+        height: 200,
+        callbacks: ['onEpochEnd'],
+      }),
     })
   }
 
@@ -261,9 +255,7 @@ function Predict2dData() {
                   onChange={(e) => field.onChange(parseInt(e.target.value))}
                 />
               </FormControl>
-              <FormDescription>
-                Number of samples per gradient update
-              </FormDescription>
+              <FormDescription>Number of samples per gradient update</FormDescription>
             </FormItem>
           )}
         />
@@ -275,10 +267,7 @@ function Predict2dData() {
             Stop Training
           </Button>
         )}
-        <Button
-          type="button"
-          onClick={() => testModel(data, convertToTensor(data))}
-        >
+        <Button type="button" onClick={() => testModel(data, convertToTensor(data))}>
           Test
         </Button>
       </form>
