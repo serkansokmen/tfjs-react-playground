@@ -23,6 +23,18 @@ interface CarData {
   horsepower: number
 }
 
+interface CarType {
+  Name: string
+  Miles_per_Gallon: number
+  Cylinders: number
+  Displacement: number
+  Horsepower: number
+  Weight_in_lbs: number
+  Acceleration: number
+  Year: string
+  Origin: string
+}
+
 const formSchema = z.object({
   epochs: z.number().int().positive(),
   batchSize: z.number().int().positive(),
@@ -75,9 +87,9 @@ function Predict2dData() {
       const req = await fetch(
         'https://storage.googleapis.com/tfjs-tutorials/carsData.json'
       )
-      const jsonData = await req.json()
+      const jsonData = (await req.json()) as CarType[]
       const cleaned = jsonData
-        .map((d: any) => ({
+        .map((d) => ({
           mpg: d['Miles_per_Gallon'],
           horsepower: d['Horsepower'],
         }))
