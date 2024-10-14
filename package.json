@@ -7,7 +7,9 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "format": "prettier --write '{src,cypress,__{tests,mocks}__}/**/*.{js,jsx,ts,tsx,css,html}'"
+    "format": "prettier --write '{src,cypress,__{tests,mocks}__}/**/*.{js,jsx,ts,tsx,css,html}'",
+    "cy:open": "cypress open",
+    "cy:run": "cypress run"
   },
   "dependencies": {
     "@hookform/resolvers": "3.9.0",

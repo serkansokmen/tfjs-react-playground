@@ -64,8 +64,7 @@ export default function TfIntro() {
   }
 
   return (
-    <div className="container mx-auto p-4">
-      <h1 className="text-2xl font-bold mb-4">f(x) = x⁶+2x⁴+3x²+x+1</h1>
+    <>
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
           <FormField
@@ -114,6 +113,6 @@ export default function TfIntro() {
           <p>{result.toString()}</p>
         </div>
       )}
-    </div>
+    </>
   )
 }
