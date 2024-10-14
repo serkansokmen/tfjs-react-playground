@@ -1,6 +1,0 @@
-keras==2.4.3
-tensorflow
-Pillow
-coremltools
-pandas
-h5py
