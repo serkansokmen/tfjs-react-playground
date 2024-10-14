@@ -1,8 +1,15 @@
 'use client'
 
-import { Button } from "@/components/ui/button"
-import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel } from "@/components/ui/form"
-import { Input } from "@/components/ui/input"
+import { Button } from '@/components/ui/button'
+import {
+  Form,
+  FormControl,
+  FormDescription,
+  FormField,
+  FormItem,
+  FormLabel,
+} from '@/components/ui/form'
+import { Input } from '@/components/ui/input'
 import { useTfjsVis } from '@/hooks/use-tfjs-vis'
 import { zodResolver } from '@hookform/resolvers/zod'
 import * as tf from '@tensorflow/tfjs'
@@ -10,7 +17,6 @@ import '@tensorflow/tfjs-backend-webgl'
 import { useEffect, useRef, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import * as z from 'zod'
-
 
 interface CarData {
   mpg: number
@@ -57,21 +63,22 @@ function Predict2dData() {
           height: 300,
         }
       )
-      modelRef.current &&
+      if (modelRef.current) {
         show.modelSummary({ name: 'Model Summary' }, modelRef.current)
+      }
       setInit(true)
     }
-  }, [data, init])
+  }, [data, init, render, show])
 
   async function getData() {
     const req = await fetch(
       'https://storage.googleapis.com/tfjs-tutorials/carsData.json'
     )
-    const jsonData = await req.json()
+    const jsonData: CarData[] = await req.json()
     const cleaned = jsonData
-      .map((d: any) => ({
-        mpg: d['Miles_per_Gallon'],
-        horsepower: d['Horsepower'],
+      .map((d) => ({
+        mpg: d.mpg,
+        horsepower: d.horsepower,
       }))
       .filter((d: CarData) => d.mpg != null && d.horsepower != null)
     setData(cleaned)
@@ -118,20 +125,23 @@ function Predict2dData() {
     })
   }
 
-  async function trainModel({ inputs, labels, epochs, batchSize }: { inputs: tf.Tensor; labels: tf.Tensor; epochs: number; batchSize: number }) {
+  async function trainModel({
+    inputs,
+    labels,
+    epochs,
+    batchSize,
+  }: {
+    inputs: tf.Tensor
+    labels: tf.Tensor
+    epochs: number
+    batchSize: number
+  }) {
     const model = modelRef.current
     model.compile({
       optimizer: tf.train.adam(),
       loss: tf.losses.meanSquaredError,
       metrics: ['mse'],
     })
-
-    class EarlyStoppingCallback extends tf.Callback {
-      async onEpochEnd(epoch: number, logs?: tf.Logs) {
-        console.log(`epoch ${epoch + 1}`, logs)
-        modelRef.current.stopTraining = isTraining
-      }
-    }
 
     return await model.fit(inputs, labels, {
       batchSize,
@@ -145,7 +155,10 @@ function Predict2dData() {
     })
   }
 
-  function testModel(inputData: CarData[], normalizationData: ReturnType<typeof convertToTensor>) {
+  function testModel(
+    inputData: CarData[],
+    normalizationData: ReturnType<typeof convertToTensor>
+  ) {
     const { inputMax, inputMin, labelMax, labelMin } = normalizationData
 
     const [xs, preds] = tf.tidy(() => {
@@ -209,7 +222,11 @@ function Predict2dData() {
             <FormItem>
               <FormLabel>Epochs</FormLabel>
               <FormControl>
-                <Input type="number" {...field} onChange={(e) => field.onChange(parseInt(e.target.value))} />
+                <Input
+                  type="number"
+                  {...field}
+                  onChange={(e) => field.onChange(parseInt(e.target.value))}
+                />
               </FormControl>
               <FormDescription>Number of training iterations</FormDescription>
             </FormItem>
@@ -222,9 +239,15 @@ function Predict2dData() {
             <FormItem>
               <FormLabel>Batch Size</FormLabel>
               <FormControl>
-                <Input type="number" {...field} onChange={(e) => field.onChange(parseInt(e.target.value))} />
+                <Input
+                  type="number"
+                  {...field}
+                  onChange={(e) => field.onChange(parseInt(e.target.value))}
+                />
               </FormControl>
-              <FormDescription>Number of samples per gradient update</FormDescription>
+              <FormDescription>
+                Number of samples per gradient update
+              </FormDescription>
             </FormItem>
           )}
         />
@@ -236,7 +259,10 @@ function Predict2dData() {
             Stop Training
           </Button>
         )}
-        <Button type="button" onClick={() => testModel(data, convertToTensor(data))}>
+        <Button
+          type="button"
+          onClick={() => testModel(data, convertToTensor(data))}
+        >
           Test
         </Button>
       </form>

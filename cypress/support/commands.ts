@@ -25,13 +25,28 @@
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
 //
-// declare global {
-//   namespace Cypress {
-//     interface Chainable {
-//       login(email: string, password: string): Chainable<void>
-//       drag(subject: string, options?: Partial<TypeOptions>): Chainable<Element>
-//       dismiss(subject: string, options?: Partial<TypeOptions>): Chainable<Element>
-//       visit(originalFn: CommandOriginalFn, url: string, options: Partial<VisitOptions>): Chainable<Element>
-//     }
-//   }
-// }
+declare global {
+  namespace Cypress {
+    interface Chainable {
+      login(email: string, password: string): Chainable<void>
+      drag(subject: string, options?: Partial<TypeOptions>): Chainable<Element>
+      dismiss(
+        subject: string,
+        options?: Partial<TypeOptions>
+      ): Chainable<Element>
+      visit(
+        originalFn: CommandOriginalFn,
+        url: string,
+        options: Partial<VisitOptions>
+      ): Chainable<Element>
+    }
+  }
+}
+
+Cypress.Commands.add(
+  'setModelInputs',
+  (epochs: string, learningRate: string) => {
+    cy.get('input[name="epochs"]').clear().type(epochs)
+    cy.get('input[name="learningRate"]').clear().type(learningRate)
+  }
+)
