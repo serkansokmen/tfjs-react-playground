@@ -15,19 +15,12 @@ import * as poseDetection from '@tensorflow-models/pose-detection'
 import '@tensorflow/tfjs-backend-webgl'
 import '@tensorflow/tfjs-core'
 import dynamic from 'next/dynamic'
-import React, { forwardRef, useEffect, useReducer, useRef } from 'react'
+import React, { useEffect, useReducer, useRef } from 'react'
 import { Circle, Layer, Line, Stage } from 'react-konva'
 import Webcam from 'react-webcam'
 import { useInterval } from 'usehooks-ts'
 
-const Player = dynamic(() => import('react-player'), { ssr: false })
-
-// Wrap Player component with forwardRef
-const ForwardedPlayer = forwardRef<
-  ReactPlayer,
-  React.ComponentProps<typeof Player>
->((props, ref) => <Player ref={ref} {...props} />)
-ForwardedPlayer.displayName = 'ForwardedPlayer'
+const ReactPlayer = dynamic(() => import('react-player'), { ssr: false })
 
 interface State {
   isReady: boolean
@@ -234,9 +227,7 @@ export default function PoseDetector() {
       return
     }
 
-    const video = state.useWebcam
-      ? currentRef.video
-      : (currentRef as unknown as ReactPlayer).getInternalPlayer()
+    const video = state.useWebcam ? currentRef.video : currentRef.video
 
     if (!video) {
       dispatch({ type: 'setMessage', payload: 'Video element not available' })
@@ -272,7 +263,7 @@ export default function PoseDetector() {
             videoConstraints={state.videoConstraints}
           />
         ) : (
-          <ForwardedPlayer
+          <ReactPlayer
             ref={videoRef}
             muted={true}
             playing={state.isPlaying}
