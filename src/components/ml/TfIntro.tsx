@@ -17,7 +17,8 @@ import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import * as z from 'zod'
 
-tf.setBackend('cpu')
+const backend = process.env.TF_BACKEND || 'cpu'
+tf.setBackend(backend)
 
 // function to minimize
 function f(x: tf.Tensor) {
