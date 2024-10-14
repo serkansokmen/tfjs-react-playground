@@ -1,0 +1,14 @@
+body {
+  background: #000000;
+  color: white;
+}
+
+.app {
+  text-align: left;
+  position: relative;
+}
+
+button {
+  padding: 5px 12px;
+  color: white;
+}
