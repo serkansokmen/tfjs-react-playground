@@ -1,5 +1,5 @@
 describe('Pages', () => {
-  beforeEach(() => {
+  before(() => {
     cy.visit('/')
     cy.clearLocalStorage()
     cy.clearCookies()
@@ -29,6 +29,7 @@ describe('Pages', () => {
     cy.get('input[name="epochs"]').clear().type('50')
     cy.get('input[name="learningRate"]').clear().type('0.9')
     cy.get('@submit').click()
+    cy.wait(1000)
     cy.contains('Tensor ')
   })
 
@@ -45,11 +46,12 @@ describe('Pages', () => {
   it('Has a working Linear Regression page', () => {
     // cy.contains('a', 'LR').first().click()
     cy.visit('/tf-linear-regression')
-
+    cy.wait(1000)
     cy.get('input[name="epochs"]').clear().type('100')
     cy.get('input[name="batchSize"]').clear().type('58')
     cy.contains('button[type="submit"]', 'Train').as('submit')
 
+    cy.wait(1000)
     cy.contains('button[type="button"]', 'Test').as('testBtn')
     cy.get('@testBtn').click()
     cy.contains('Horsepower v MPG')
