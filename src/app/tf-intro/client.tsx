@@ -1,14 +1,20 @@
 'use client'
 
+import { Button } from '@/components/ui/button'
+import {
+  Form,
+  FormControl,
+  FormDescription,
+  FormField,
+  FormItem,
+  FormLabel,
+} from '@/components/ui/form'
+import { Input } from '@/components/ui/input'
+import { zodResolver } from '@hookform/resolvers/zod'
+import * as tf from '@tensorflow/tfjs'
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
-import { zodResolver } from '@hookform/resolvers/zod'
 import * as z from 'zod'
-import * as tf from '@tensorflow/tfjs'
-import { Button } from "@/components/ui/button"
-import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel } from "@/components/ui/form"
-import { Input } from "@/components/ui/input"
-import { useTfjsVis } from '@/hooks/use-tfjs-vis'
 
 // function to minimize
 function f(x: tf.Tensor) {
@@ -26,7 +32,6 @@ const formSchema = z.object({
 
 export default function TfIntro() {
   const [result, setResult] = useState<tf.Tensor | null>(null)
-  const { visor, show } = useTfjsVis()
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -41,7 +46,7 @@ export default function TfIntro() {
   // learning rate defines how fast we jump to reach the minimum
   // on Adam optimizer
   function minimize(epochs: number, lr: number) {
-    let y = tf.variable(tf.scalar(2)) // initial value
+    const y = tf.variable(tf.scalar(2)) // initial value
     const optim = tf.train.adam(lr) // gradient descent algorithm
     for (let i = 0; i < epochs; i++) {
       optim.minimize(() => f(y).asScalar())
@@ -70,7 +75,11 @@ export default function TfIntro() {
               <FormItem>
                 <FormLabel>Epochs</FormLabel>
                 <FormControl>
-                  <Input type="number" {...field} onChange={(e) => field.onChange(parseInt(e.target.value))} />
+                  <Input
+                    type="number"
+                    {...field}
+                    onChange={(e) => field.onChange(parseInt(e.target.value))}
+                  />
                 </FormControl>
                 <FormDescription>Number of training iterations</FormDescription>
               </FormItem>
@@ -83,9 +92,16 @@ export default function TfIntro() {
               <FormItem>
                 <FormLabel>Learning Rate</FormLabel>
                 <FormControl>
-                  <Input type="number" step="0.1" {...field} onChange={(e) => field.onChange(parseFloat(e.target.value))} />
+                  <Input
+                    type="number"
+                    step="0.1"
+                    {...field}
+                    onChange={(e) => field.onChange(parseFloat(e.target.value))}
+                  />
                 </FormControl>
-                <FormDescription>Rate at which the model learns</FormDescription>
+                <FormDescription>
+                  Rate at which the model learns
+                </FormDescription>
               </FormItem>
             )}
           />
