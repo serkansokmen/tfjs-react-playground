@@ -7,7 +7,6 @@ describe('Pages', () => {
 
   it('Home page should have correct links.', () => {
     cy.contains('a', 'Home')
-    cy.contains('a', 'Intro')
     cy.contains('a', 'XOR')
     cy.contains('a', 'LR')
     cy.contains('a', 'CNN')
@@ -18,7 +17,7 @@ describe('Pages', () => {
 
   it('Intro page should train on function f(x) = x⁶+2x⁴+3x²+x+1.', () => {
     // cy.contains('a', 'Intro').first().click()
-    cy.visit('/tf-intro')
+    cy.visit('/')
     cy.contains('f(x) = x⁶+2x⁴+3x²+x+1')
 
     cy.get('input[name="epochs"]').clear().type('100')
