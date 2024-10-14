@@ -2,8 +2,8 @@
 
 import React, { useState, useEffect } from 'react'
 import * as tf from '@tensorflow/tfjs'
-import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { Button } from '@/components/ui/button'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { useTfjsVis } from '@/hooks/use-tfjs-vis'
 
 const BATCH_SIZE = 500
@@ -70,22 +70,23 @@ export default function TfCnn() {
     })
     const batch = tf.zeros([BATCH_SIZE, 28, 28, 1])
     const labels = tf.zeros([BATCH_SIZE, NUM_CLASSES])
-    
+
     const h = await model.fit(batch, labels, {
       batchSize: BATCH_SIZE,
       epochs: 1,
-      callbacks: visor ? show.fitCallbacks(
-        { name: 'Training Performance' },
-        ['loss', 'acc'],
-        { height: 200, callbacks: ['onEpochEnd'] }
-      ) : undefined,
+      callbacks: visor
+        ? show.fitCallbacks({ name: 'Training Performance' }, ['loss', 'acc'], {
+            height: 200,
+            callbacks: ['onEpochEnd'],
+          })
+        : undefined,
     })
-    
+
     setResult(JSON.stringify(h.history, null, 2))
     setIsTraining(false)
 
     if (visor) {
-      show.modelSummary({name: 'Model Architecture'}, model)
+      show.modelSummary({ name: 'Model Architecture' }, model)
     }
   }
 
@@ -107,7 +108,9 @@ export default function TfCnn() {
               Training...
             </div>
           ) : result ? (
-            <pre className="bg-gray-100 p-2 rounded overflow-auto max-h-60">{result}</pre>
+            <pre className="bg-gray-100 p-2 rounded overflow-auto max-h-60">
+              {result}
+            </pre>
           ) : (
             <p>Model not trained yet</p>
           )}

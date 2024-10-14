@@ -1,8 +1,8 @@
 'use client'
 
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Checkbox } from "@/components/ui/checkbox"
-import { Slider } from "@/components/ui/slider"
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { Checkbox } from '@/components/ui/checkbox'
+import { Slider } from '@/components/ui/slider'
 import * as cocoSsd from '@tensorflow-models/coco-ssd'
 import '@tensorflow/tfjs-backend-webgl'
 import '@tensorflow/tfjs-core'
@@ -83,25 +83,28 @@ export default function CocoSsd() {
     }
   }, [])
 
-  const renderRect = useCallback((prediction: cocoSsd.DetectedObject, key: number) => {
-    const [x, y, width, height] = prediction.bbox
-    return (
-      <Group x={x} y={y} key={key}>
-        <Rect
-          width={width}
-          height={height}
-          fill="transparent"
-          stroke="#00ff00"
-        />
-        <Text
-          offsetY={16}
-          text={`${prediction.class} (${Math.round(prediction.score * 100)}%)`}
-          fill="#ffffff"
-          fontColor="#000000"
-        />
-      </Group>
-    )
-  }, [])
+  const renderRect = useCallback(
+    (prediction: cocoSsd.DetectedObject, key: number) => {
+      const [x, y, width, height] = prediction.bbox
+      return (
+        <Group x={x} y={y} key={key}>
+          <Rect
+            width={width}
+            height={height}
+            fill="transparent"
+            stroke="#00ff00"
+          />
+          <Text
+            offsetY={16}
+            text={`${prediction.class} (${Math.round(prediction.score * 100)}%)`}
+            fill="#ffffff"
+            fontColor="#000000"
+          />
+        </Group>
+      )
+    },
+    []
+  )
 
   useInterval(() => {
     const input = webcamRef.current?.video
@@ -116,7 +119,9 @@ export default function CocoSsd() {
 
   return (
     <div className="container mx-auto p-4">
-      <h1 className="text-2xl font-bold mb-4">Tensorflow Playground / COCO-SSD</h1>
+      <h1 className="text-2xl font-bold mb-4">
+        Tensorflow Playground / COCO-SSD
+      </h1>
       <div className="relative">
         <Webcam
           ref={webcamRef}
@@ -126,11 +131,7 @@ export default function CocoSsd() {
           screenshotFormat="image/jpeg"
           videoConstraints={state.videoConstraints}
         />
-        <Stage
-          className="absolute top-0 left-0"
-          width={640}
-          height={480}
-        >
+        <Stage className="absolute top-0 left-0" width={640} height={480}>
           <Layer>{state.predictions.map((p, key) => renderRect(p, key))}</Layer>
         </Stage>
       </div>
@@ -143,8 +144,11 @@ export default function CocoSsd() {
             <Checkbox
               id="tracking"
               checked={state.isTrackingEnabled}
-              onCheckedChange={(checked) => 
-                dispatch({ type: 'setIsTrackingEnabled', payload: checked as boolean })
+              onCheckedChange={(checked) =>
+                dispatch({
+                  type: 'setIsTrackingEnabled',
+                  payload: checked as boolean,
+                })
               }
             />
             <label htmlFor="tracking">Enable Tracking</label>
@@ -153,14 +157,18 @@ export default function CocoSsd() {
             <p>{state.predictions.length} predictions found</p>
           </div>
           <div>
-            <label htmlFor="updateInterval">Update Interval: {state.updateMilis}ms</label>
+            <label htmlFor="updateInterval">
+              Update Interval: {state.updateMilis}ms
+            </label>
             <Slider
               id="updateInterval"
               min={10}
               max={250}
               step={10}
               value={[state.updateMilis]}
-              onValueChange={(value) => dispatch({ type: 'setUpdateMilis', payload: value[0] })}
+              onValueChange={(value) =>
+                dispatch({ type: 'setUpdateMilis', payload: value[0] })
+              }
             />
           </div>
         </CardContent>

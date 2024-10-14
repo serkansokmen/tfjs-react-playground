@@ -9,8 +9,8 @@ export function useTfjsVis() {
 
   useEffect(() => {
     if (!visorRef.current) {
-        visorRef.current = tfVis.visor()
-        visorRef.current.open()
+      visorRef.current = tfVis.visor()
+      visorRef.current.open()
     }
 
     return () => {
