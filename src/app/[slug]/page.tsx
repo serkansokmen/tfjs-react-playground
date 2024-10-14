@@ -1,25 +1,11 @@
-import dynamic from 'next/dynamic'
 import type { Metadata, ResolvingMetadata } from 'next'
-import Loading from './loading'
-import { ComponentType } from 'react'
+import dynamic from 'next/dynamic'
 import { redirect } from 'next/navigation'
-
-const PageClient = dynamic(() => import('./client'), {
-  loading: () => <Loading message="Loading TensorFlow.js component..." />,
-  ssr: false,
-})
+import { ComponentType } from 'react'
 
 type PageProps = {
   params: {
-    slug:
-      | 'tf-intro'
-      | 'tf-xor'
-      | 'tf-linear-regression'
-      | 'tf-cnn'
-      | 'tf-lstm'
-      | 'tf-posenet'
-      | 'tf-body-pix'
-      | 'tf-coco-ssd'
+    slug: string
   }
   searchParams: { [key: string]: string | string[] | undefined }
 }
@@ -33,64 +19,70 @@ export type ComponentsType = {
   [key: string]: PageType
 }
 
-const components: ComponentsType = {
-  'tf-intro': {
-    component: dynamic(() => import('@/components/ml/TfIntro'), { ssr: false }),
-    metadata: {
-      title: 'Tensorflow Playground / Intro',
-      description: 'Introduction to TensorFlow.js',
-    },
+const componentData = [
+  {
+    path: 'tf-intro',
+    title: 'Tensorflow Playground / Intro',
+    description: 'Introduction to TensorFlow.js',
+    componentPath: 'ml/TfIntro',
   },
-  'tf-xor': {
-    component: dynamic(() => import('@/components/ml/TfXor'), { ssr: false }),
-    metadata: {
-      title: 'Tensorflow Playground / XOR',
-      description: 'XOR problem using TensorFlow.js',
-    },
+  {
+    path: 'tf-xor',
+    title: 'Tensorflow Playground / XOR',
+    description: 'XOR problem using TensorFlow.js',
+    componentPath: 'ml/TfXor',
   },
-  'tf-linear-regression': {
-    component: dynamic(() => import('@/components/ml/TfLinearRegression'), { ssr: false }),
-    metadata: {
-      title: 'Tensorflow Playground / Linear Regression',
-      description: 'Linear regression using TensorFlow.js',
-    },
+  {
+    path: 'tf-linear-regression',
+    title: 'Tensorflow Playground / Linear Regression',
+    description: 'Linear regression using TensorFlow.js',
+    componentPath: 'ml/TfLinearRegression',
   },
-  'tf-cnn': {
-    component: dynamic(() => import('@/components/ml/TfCnn'), { ssr: false }),
-    metadata: {
-      title: 'Tensorflow Playground / CNN',
-      description: 'Convolutional neural network using TensorFlow.js',
-    },
+  {
+    path: 'tf-cnn',
+    title: 'Tensorflow Playground / CNN',
+    description: 'Convolutional neural network using TensorFlow.js',
+    componentPath: 'ml/TfCnn',
   },
-  'tf-lstm': {
-    component: dynamic(() => import('@/components/ml/TfLstm'), { ssr: false }),
-    metadata: {
-      title: 'Tensorflow Playground / LSTM',
-      description: 'Long short-term memory using TensorFlow.js',
-    },
+  {
+    path: 'tf-lstm',
+    title: 'Tensorflow Playground / LSTM',
+    description: 'Long short-term memory using TensorFlow.js',
+    componentPath: 'ml/TfLstm',
   },
-  'tf-posenet': {
-    component: dynamic(() => import('@/components/ml/TfPosenet'), { ssr: false }),
-    metadata: {
-      title: 'Tensorflow Playground / Posenet',
-      description: 'Real-time pose estimation using PoseNet and TensorFlow.js',
-    },
+  {
+    path: 'tf-posenet',
+    title: 'Tensorflow Playground / Posenet',
+    description: 'Real-time pose estimation using PoseNet and TensorFlow.js',
+    componentPath: 'ml/TfPosenet',
   },
-  'tf-body-pix': {
-    component: dynamic(() => import('@/components/ml/TfBodyPix'), { ssr: false }),
-    metadata: {
-      title: 'Tensorflow Playground / Body Pix',
-      description: 'Body segmentation using TensorFlow.js BodyPix model',
-    },
+  {
+    path: 'tf-body-pix',
+    title: 'Tensorflow Playground / Body Pix',
+    description: 'Body segmentation using TensorFlow.js BodyPix model',
+    componentPath: 'ml/TfBodyPix',
   },
-  'tf-coco-ssd': {
-    component: dynamic(() => import('@/components/ml/TfCocoSsd'), { ssr: false }),
-    metadata: {
-      title: 'Tensorflow Playground / COCO SSD',
-      description: 'Object detection using TensorFlow.js COCO SSD model',
-    },
+  {
+    path: 'tf-coco-ssd',
+    title: 'Tensorflow Playground / COCO SSD',
+    description: 'Object detection using TensorFlow.js COCO SSD model',
+    componentPath: 'ml/TfCocoSsd',
   },
-}
+]
+
+const components: ComponentsType = componentData.reduce(
+  (acc, { componentPath, title, description, path }) => {
+    acc[path] = {
+      component: dynamic(() => import(`@/components/${componentPath}`), { ssr: false }),
+      metadata: {
+        title,
+        description,
+      },
+    }
+    return acc
+  },
+  {} as ComponentsType
+)
 
 export async function generateMetadata(
   { params, searchParams }: PageProps,
