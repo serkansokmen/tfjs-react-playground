@@ -2,6 +2,7 @@ import dynamic from 'next/dynamic'
 import type { Metadata, ResolvingMetadata } from 'next'
 import Loading from './loading'
 import { ComponentType } from 'react'
+import { redirect } from 'next/navigation'
 
 const PageClient = dynamic(() => import('./client'), {
   loading: () => <Loading message="Loading TensorFlow.js component..." />,
@@ -102,5 +103,9 @@ export async function generateMetadata(
 export default function Page({ params, searchParams }: PageProps) {
   const { slug = 'tf-intro' } = params
   const page = components[slug as string]
+  if (!page) {
+    // redirect as appropriate
+    return redirect('/404')
+  }
   return <page.component />
 }
