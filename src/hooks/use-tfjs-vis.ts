@@ -8,7 +8,7 @@ export function useTfjsVis() {
   const visorRef = useRef<Visor | null>(null)
 
   useEffect(() => {
-    if (visorRef.current) {
+    if (!visorRef.current) {
         visorRef.current = tfVis.visor()
         visorRef.current.open()
     }
