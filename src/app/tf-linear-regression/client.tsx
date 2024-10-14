@@ -71,17 +71,21 @@ function Predict2dData() {
   }, [data, init, render, show])
 
   async function getData() {
-    const req = await fetch(
-      'https://storage.googleapis.com/tfjs-tutorials/carsData.json'
-    )
-    const jsonData: CarData[] = await req.json()
-    const cleaned = jsonData
-      .map((d) => ({
-        mpg: d.mpg,
-        horsepower: d.horsepower,
-      }))
-      .filter((d: CarData) => d.mpg != null && d.horsepower != null)
-    setData(cleaned)
+    try {
+      const req = await fetch(
+        'https://storage.googleapis.com/tfjs-tutorials/carsData.json'
+      )
+      const jsonData = await req.json()
+      const cleaned = jsonData
+        .map((d: any) => ({
+          mpg: d['Miles_per_Gallon'],
+          horsepower: d['Horsepower'],
+        }))
+        .filter((d: CarData) => d.mpg != null && d.horsepower != null)
+      setData(cleaned)
+    } catch (error) {
+      console.error('Failed to fetch data:', error)
+    }
   }
 
   function createModel() {
