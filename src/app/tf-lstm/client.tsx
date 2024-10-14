@@ -1,8 +1,8 @@
 'use client'
 
-import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Input } from "@/components/ui/input"
+import { Button } from '@/components/ui/button'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { Input } from '@/components/ui/input'
 import { useTfjsVis } from '@/hooks/use-tfjs-vis'
 import * as tf from '@tensorflow/tfjs'
 import '@tensorflow/tfjs-backend-webgl'
@@ -25,9 +25,9 @@ export default function LSTM({ modelKey }: LSTMProps) {
       const m = await tf.loadLayersModel(`/static/models/${key}/model.json`)
       setIsModelReady(true)
       setModel(m)
-      
+
       if (visor) {
-        show.modelSummary({name: 'LSTM Model Architecture'}, m)
+        show.modelSummary({ name: 'LSTM Model Architecture' }, m)
       }
     } catch (err) {
       setError(`Failed to load model: ${err}`)
@@ -47,17 +47,23 @@ export default function LSTM({ modelKey }: LSTMProps) {
     if (!model) return
 
     try {
-      const prediction = await model.predict(
-        tf.tensor2d([Array.from(inputText).map(char => char.charCodeAt(0))], [1, inputText.length])
-      ) as tf.Tensor
+      const prediction = (await model.predict(
+        tf.tensor2d(
+          [Array.from(inputText).map((char) => char.charCodeAt(0))],
+          [1, inputText.length]
+        )
+      )) as tf.Tensor
 
       const predictedIndices = tf.argMax(prediction as tf.Tensor, 1).dataSync()
       const predictedText = String.fromCharCode(...Array.from(predictedIndices))
-      
+
       setPrediction(predictedText)
 
       if (visor) {
-        show.valuesDistribution({name: 'Prediction Distribution'}, prediction as tf.Tensor)
+        show.valuesDistribution(
+          { name: 'Prediction Distribution' },
+          prediction as tf.Tensor
+        )
       }
     } catch (err) {
       setError(`Prediction failed: ${err}`)
