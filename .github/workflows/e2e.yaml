@@ -1,56 +1,36 @@
-name: Build
-on: [push]
+name: E2E
+on:
+  push:
+    branches:
+      - main
+      - develop
+  pull_request:
+    branches:
+      - main
+      - develop
 jobs:
   cypress-run:
-    runs-on: ubuntu-16.04
-    strategy:
-      # when one test fails, DO NOT cancel the other
-      # containers, because this will kill Cypress processes
-      # leaving the Dashboard hanging ...
-      # https://github.com/cypress-io/github-action/issues/48
-      fail-fast: false
-      matrix:
-        # run 1 copy of the current job in parallel
-        containers: [1]
-        node: [12]
+    environment: Preview
+    runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     steps:
-      - uses: actions/setup-node@v1
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Use Node.js
+        uses: actions/setup-node@v4
         with:
-          node-version: ${{ matrix.node }}
-
-      - uses: actions/checkout@v1
-
-      - name: Install dependencies
-        uses: cypress-io/github-action@v2
+          node-version: '20'
+      - name: Debug Environment Variables
+        run: |
+          echo "Debugging environment variables:"
+          echo "GH_TOKEN: ${{ secrets.GITHUB_TOKEN != '' }}"
+      - name: Cypress run
+        uses: cypress-io/github-action@v6
         with:
-          # just perform install
-          runTests: false
-
-      - uses: cypress-io/github-action@v2
-        with:
-          install: false
-          build: yarn build
-          start: yarn start
-          wait-on: 'http://localhost:3000'
+          build: npm run build
+          start: npm start
           browser: chrome
-          headless: true
+          record: false
         env:
-          CYPRESS_baseUrl: http://localhost:3000/
-
-      # after the test run completes
-      # store videos and any screenshots
-      # NOTE: screenshots will be generated only if E2E test failed
-      # thus we store screenshots only on failures
-      # Alternative: create and commit an empty cypress/screenshots folder
-      # to always have something to upload
-      - uses: actions/upload-artifact@v1
-        if: failure()
-        with:
-          name: cypress-screenshots
-          path: cypress/screenshots
-      # Test run video was always captured, so this action uses "always()" condition
-      - uses: actions/upload-artifact@v1
-        if: always()
-        with:
-          name: cypress-videos
-          path: cypress/videos
+          CYPRESS_BASE_URL: http://localhost:3000
