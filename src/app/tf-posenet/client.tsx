@@ -91,17 +91,27 @@ const initialState: State = {
 function reducer(state: State, action: Action): State {
   switch (action.type) {
     case 'setReady':
+      return { ...state, isReady: action.payload }
     case 'setModel':
+      return { ...state, model: action.payload }
     case 'setDetector':
+      return { ...state, detector: action.payload }
     case 'setScoreThreshold':
+      return { ...state, scoreThreshold: action.payload }
     case 'setMaxPoses':
+      return { ...state, maxPoses: action.payload }
     case 'setUpdateInterval':
+      return { ...state, updateInterval: action.payload }
     case 'setPoses':
+      return { ...state, poses: action.payload }
     case 'setUseWebcam':
+      return { ...state, useWebcam: action.payload }
     case 'setIsPlaying':
+      return { ...state, isPlaying: action.payload }
     case 'setIsTrackingEnabled':
+      return { ...state, isTrackingEnabled: action.payload }
     case 'setMessage':
-      return { ...state, [action.type.slice(3)]: action.payload }
+      return { ...state, message: action.payload }
     default:
       throw new Error('Unexpected action')
   }
