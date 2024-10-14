@@ -235,7 +235,7 @@ export default function PoseDetector() {
     }
 
     const video = state.useWebcam
-      ? currentRef.getCanvas()
+      ? currentRef.video
       : (currentRef as unknown as ReactPlayer).getInternalPlayer()
 
     if (!video) {

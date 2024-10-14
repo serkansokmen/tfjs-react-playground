@@ -2,14 +2,14 @@
 
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import * as bodyPix from '@tensorflow-models/body-pix'
+import bodyPix, { BodyPix } from '@tensorflow-models/body-pix'
 import '@tensorflow/tfjs-backend-webgl'
 import '@tensorflow/tfjs-core'
 import { useEffect, useRef, useState } from 'react'
 import Webcam from 'react-webcam'
 
 export default function BodyPixComponent() {
-  const [net, setNet] = useState<bodyPix.BodyPix | null>(null)
+  const [net, setNet] = useState<BodyPix | null>(null)
   const [isProcessing, setIsProcessing] = useState(false)
   const webcamRef = useRef<Webcam>(null)
   const canvasRef = useRef<HTMLCanvasElement>(null)
@@ -35,7 +35,7 @@ export default function BodyPixComponent() {
     if (!ctx) return
 
     const segmentation = await net.segmentPerson(video)
-    const coloredPartImage = bodyPix.toColoredPartMask(segmentation)
+    const coloredPartImage = bodyPix.toColoredPartMask(segmentation as any)
 
     const opacity = 0.7
     const flipHorizontal = false
