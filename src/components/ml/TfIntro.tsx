@@ -1,3 +1,4 @@
+// tf-intro/pages/client.tsx
 'use client'
 
 import { Button } from '@/components/ui/button'
@@ -15,6 +16,8 @@ import * as tf from '@tensorflow/tfjs'
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import * as z from 'zod'
+
+tf.setBackend('cpu')
 
 // function to minimize
 function f(x: tf.Tensor) {
@@ -57,14 +60,11 @@ export default function TfIntro() {
   function onSubmit(values: z.infer<typeof formSchema>) {
     const result = minimize(values.epochs, values.learningRate)
     setResult(result)
-
-    // if (visor) {
-    //   show.values(visor, [result], 'Optimization Result')
-    // }
   }
 
   return (
-    <>
+    <div className="container mx-auto p-4">
+      <h1 className="text-2xl font-bold mb-4">f(x) = x⁶+2x⁴+3x²+x+1</h1>
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
           <FormField
@@ -98,9 +98,7 @@ export default function TfIntro() {
                     onChange={(e) => field.onChange(parseFloat(e.target.value))}
                   />
                 </FormControl>
-                <FormDescription>
-                  Rate at which the model learns
-                </FormDescription>
+                <FormDescription>Rate at which the model learns</FormDescription>
               </FormItem>
             )}
           />
@@ -113,6 +111,6 @@ export default function TfIntro() {
           <p>{result.toString()}</p>
         </div>
       )}
-    </>
+    </div>
   )
 }
