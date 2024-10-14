@@ -2,14 +2,15 @@
 
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import bodyPix, { BodyPix } from '@tensorflow-models/body-pix'
+import * as bodyPix from '@tensorflow-models/body-pix'
+
 import '@tensorflow/tfjs-backend-webgl'
 import '@tensorflow/tfjs-core'
 import { useEffect, useRef, useState } from 'react'
 import Webcam from 'react-webcam'
 
 export default function BodyPixComponent() {
-  const [net, setNet] = useState<BodyPix | null>(null)
+  const [net, setNet] = useState<bodyPix.BodyPix | null>(null)
   const [isProcessing, setIsProcessing] = useState(false)
   const webcamRef = useRef<Webcam>(null)
   const canvasRef = useRef<HTMLCanvasElement>(null)
