@@ -3,10 +3,16 @@
 import { useEffect } from 'react'
 import { Button } from '@/components/ui/button'
 
-export default function Error({ errorInstance, reset }: { errorInstance: Error; reset: () => void }) {
+export default function Error({
+  errorInstance,
+  reset,
+}: {
+  errorInstance: Error
+  reset: () => void
+}) {
   useEffect(() => {
-    console.error(error)
-  }, [error])
+    console.error(errorInstance)
+  }, [errorInstance])
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-background">
