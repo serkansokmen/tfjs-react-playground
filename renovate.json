@@ -32,6 +32,11 @@
         "@tensorflow-models/posenet"
       ],
       "groupName": "@tensorflow-models"
+    },
+    {
+      "packageNames": ["eslint"],
+      "allowedVersions": "8.x",
+      "groupName": "ESLint 8"
     }
   ]
 }
