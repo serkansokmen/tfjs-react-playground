@@ -34,7 +34,7 @@
     "next": "14.2.15",
     "react": "18",
     "react-dom": "18",
-    "react-hook-form": "7.53.0",
+    "react-hook-form": "7.53.1",
     "react-konva": "18.2.10",
     "react-player": "2.16.0",
     "react-webcam": "7.2.0",
