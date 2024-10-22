@@ -6,14 +6,14 @@ type NavLink = {
 }
 
 const links: NavLink[] = [
-  { href: '/tf-intro', label: 'Intro' },
-  { href: '/tf-xor', label: 'XOR' },
-  { href: '/tf-linear-regression', label: 'LR' },
-  { href: '/tf-cnn', label: 'CNN' },
-  // { href: '/tf-lstm?key=shakespeare', label: 'LSTM' }, // TODO: Fix LSTM with custom models or remove this link
-  { href: '/tf-posenet', label: 'Posenet' },
-  { href: '/tf-body-pix', label: 'Body Pix' },
-  { href: '/tf-coco-ssd', label: 'Coco SSD' },
+  { href: '/intro', label: 'Intro' },
+  { href: '/xor', label: 'XOR' },
+  { href: '/linear-regression', label: 'LR' },
+  { href: '/cnn', label: 'CNN' },
+  // { href: '/lstm?key=shakespeare', label: 'LSTM' }, // TODO: Fix LSTM with custom models or remove this link
+  { href: '/posenet', label: 'Posenet' },
+  { href: '/body-pix', label: 'Body Pix' },
+  { href: '/coco-ssd', label: 'Coco SSD' },
 ]
 
 function Nav() {
