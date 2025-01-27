@@ -9,7 +9,7 @@ import '@tensorflow/tfjs-backend-webgl'
 import '@tensorflow/tfjs-core'
 import { useCallback, useEffect, useReducer, useRef } from 'react'
 import { Group, Layer, Rect, Stage, Text } from 'react-konva'
-import Webcam from 'react-webcam'
+import { Video } from '@/components/Video'
 
 interface State {
   isReady: boolean
@@ -59,7 +59,7 @@ function reducer(state: State, action: Action): State {
 export default function TfCocoSsd() {
   const [state, dispatch] = useReducer(reducer, initialState)
   const net = useRef<cocoSsd.ObjectDetection | null>(null)
-  const webcamRef = useRef<Webcam>(null)
+  const videoRef = useRef<HTMLVideoElement>(null)
 
   async function loadNet() {
     net.current = await cocoSsd.load()
@@ -76,9 +76,9 @@ export default function TfCocoSsd() {
     }
   }, [state.isTrackingEnabled])
 
-  const predict = useCallback(async (input: HTMLVideoElement) => {
-    if (net.current) {
-      const predictions = await net.current.detect(input)
+  const predict = useCallback(async () => {
+    if (net.current && videoRef.current) {
+      const predictions = await net.current.detect(videoRef.current)
       dispatch({ type: 'setPredictions', payload: predictions })
     }
   }, [])
@@ -102,9 +102,9 @@ export default function TfCocoSsd() {
     if (!state.isReady) return
     const interval = setInterval(() => {
       if (!state.isReady) return
-      const input = webcamRef.current?.video
+      const input = videoRef.current
       if (state.isReady && state.isTrackingEnabled && input) {
-        predict(input)
+        predict()
       }
     }, state.updateMilis)
     return () => clearInterval(interval)
@@ -118,13 +118,11 @@ export default function TfCocoSsd() {
     <div className="container mx-auto p-4">
       <h1 className="text-2xl font-bold mb-4">Tensorflow Playground / COCO-SSD</h1>
       <div className="relative">
-        <Webcam
-          ref={webcamRef}
-          audio={false}
+        <Video
+          ref={videoRef as any}
           width={640}
           height={480}
-          screenshotFormat="image/jpeg"
-          videoConstraints={state.videoConstraints}
+          constraints={state.videoConstraints}
         />
         <Stage className="absolute top-0 left-0" width={640} height={480}>
           <Layer>{state.predictions.map((p, key) => renderRect(p, key))}</Layer>

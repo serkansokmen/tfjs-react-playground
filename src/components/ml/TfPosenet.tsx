@@ -18,7 +18,7 @@ import '@tensorflow/tfjs-core'
 import dynamic from 'next/dynamic'
 import React, { useEffect, useReducer, useRef } from 'react'
 import { Circle, Layer, Line, Stage } from 'react-konva'
-import Webcam from 'react-webcam'
+import { Video } from '@/components/Video'
 
 const ReactPlayer = dynamic(() => import('react-player'), { ssr: false })
 
@@ -166,7 +166,7 @@ Skeleton.displayName = 'Skeleton'
 
 export default function PoseDetector() {
   const [state, dispatch] = useReducer(reducer, initialState)
-  const videoRef = useRef<Webcam | null>(null)
+  const videoRef = useRef<HTMLVideoElement>(null)
 
   const loadDetector = async () => {
     if (state.detector) {
@@ -217,14 +217,7 @@ export default function PoseDetector() {
         return
       }
 
-      const video = state.useWebcam ? currentRef.video : currentRef.video
-
-      if (!video) {
-        dispatch({ type: 'setMessage', payload: 'Video element not available' })
-        return
-      }
-
-      const poses = await state.detector.estimatePoses(video, {
+      const poses = await state.detector.estimatePoses(currentRef, {
         maxPoses: state.maxPoses,
         scoreThreshold: state.scoreThreshold,
       })
@@ -244,13 +237,11 @@ export default function PoseDetector() {
       <h1 className="text-2xl font-bold mb-4">Tensorflow Playground / Pose Detection</h1>
       <div className="relative mb-4">
         {state.useWebcam ? (
-          <Webcam
-            ref={videoRef}
-            audio={false}
+          <Video
+            ref={videoRef as any}
             width={state.size.width}
             height={state.size.height}
-            screenshotFormat="image/jpeg"
-            videoConstraints={state.videoConstraints}
+            constraints={state.videoConstraints}
           />
         ) : (
           <ReactPlayer
