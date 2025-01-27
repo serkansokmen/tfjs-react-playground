@@ -12,15 +12,12 @@ import {
   SelectValue,
 } from '@/components/ui/select'
 import { Slider } from '@/components/ui/slider'
+import { Video } from '@/components/Video'
 import * as poseDetection from '@tensorflow-models/pose-detection'
 import '@tensorflow/tfjs-backend-webgl'
 import '@tensorflow/tfjs-core'
-import dynamic from 'next/dynamic'
 import React, { useEffect, useReducer, useRef } from 'react'
 import { Circle, Layer, Line, Stage } from 'react-konva'
-import { Video } from '@/components/Video'
-
-const ReactPlayer = dynamic(() => import('react-player'), { ssr: false })
 
 interface State {
   isReady: boolean
@@ -56,7 +53,6 @@ type Action =
   | { type: 'setUseWebcam'; payload: boolean }
   | { type: 'setIsPlaying'; payload: boolean }
   | { type: 'setIsTrackingEnabled'; payload: boolean }
-  | { type: 'setMessage'; payload: string }
 
 const initialState: State = {
   isReady: false,
@@ -103,8 +99,6 @@ function reducer(state: State, action: Action): State {
       return { ...state, isPlaying: action.payload }
     case 'setIsTrackingEnabled':
       return { ...state, isTrackingEnabled: action.payload }
-    case 'setMessage':
-      return { ...state, message: action.payload }
     default:
       throw new Error('Unexpected action')
   }
@@ -207,23 +201,17 @@ export default function PoseDetector() {
   }, [state.model])
 
   useEffect(() => {
-    if (!state.isReady) return
+    if (!state.isReady || !state.isTrackingEnabled || !state.detector) return
+
     const interval = setInterval(async () => {
-      if (!state.isReady || !state.isTrackingEnabled || !state.detector) return
+      if (videoRef.current && state.detector) {
+        const poses = await state.detector.estimatePoses(videoRef.current, {
+          maxPoses: state.maxPoses,
+          scoreThreshold: state.scoreThreshold,
+        })
 
-      const currentRef = videoRef.current
-      if (!currentRef) {
-        dispatch({ type: 'setMessage', payload: 'No input image' })
-        return
+        dispatch({ type: 'setPoses', payload: poses })
       }
-
-      const poses = await state.detector.estimatePoses(currentRef, {
-        maxPoses: state.maxPoses,
-        scoreThreshold: state.scoreThreshold,
-      })
-
-      dispatch({ type: 'setPoses', payload: poses })
-      dispatch({ type: 'setMessage', payload: `Found ${poses.length} poses` })
     }, state.updateInterval)
     return () => clearInterval(interval)
   }, [state])
@@ -244,8 +232,8 @@ export default function PoseDetector() {
             constraints={state.videoConstraints}
           />
         ) : (
-          <ReactPlayer
-            ref={videoRef}
+          <Video
+            ref={videoRef as any}
             muted={true}
             playing={state.isPlaying}
             width={state.size.width}
