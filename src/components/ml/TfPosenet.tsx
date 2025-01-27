@@ -19,7 +19,6 @@ import dynamic from 'next/dynamic'
 import React, { useEffect, useReducer, useRef } from 'react'
 import { Circle, Layer, Line, Stage } from 'react-konva'
 import Webcam from 'react-webcam'
-import { useInterval } from 'usehooks-ts'
 
 const ReactPlayer = dynamic(() => import('react-player'), { ssr: false })
 
@@ -207,30 +206,34 @@ export default function PoseDetector() {
     loadDetector()
   }, [state.model])
 
-  useInterval(async () => {
-    if (!state.isReady || !state.isTrackingEnabled || !state.detector) return
+  useEffect(() => {
+    if (!state.isReady) return
+    const interval = setInterval(async () => {
+      if (!state.isReady || !state.isTrackingEnabled || !state.detector) return
 
-    const currentRef = videoRef.current
-    if (!currentRef) {
-      dispatch({ type: 'setMessage', payload: 'No input image' })
-      return
-    }
+      const currentRef = videoRef.current
+      if (!currentRef) {
+        dispatch({ type: 'setMessage', payload: 'No input image' })
+        return
+      }
 
-    const video = state.useWebcam ? currentRef.video : currentRef.video
+      const video = state.useWebcam ? currentRef.video : currentRef.video
 
-    if (!video) {
-      dispatch({ type: 'setMessage', payload: 'Video element not available' })
-      return
-    }
+      if (!video) {
+        dispatch({ type: 'setMessage', payload: 'Video element not available' })
+        return
+      }
 
-    const poses = await state.detector.estimatePoses(video, {
-      maxPoses: state.maxPoses,
-      scoreThreshold: state.scoreThreshold,
-    })
+      const poses = await state.detector.estimatePoses(video, {
+        maxPoses: state.maxPoses,
+        scoreThreshold: state.scoreThreshold,
+      })
 
-    dispatch({ type: 'setPoses', payload: poses })
-    dispatch({ type: 'setMessage', payload: `Found ${poses.length} poses` })
-  }, state.updateInterval)
+      dispatch({ type: 'setPoses', payload: poses })
+      dispatch({ type: 'setMessage', payload: `Found ${poses.length} poses` })
+    }, state.updateInterval)
+    return () => clearInterval(interval)
+  }, [state])
 
   const handleVideoError = () => {
     dispatch({ type: 'setUseWebcam', payload: true })

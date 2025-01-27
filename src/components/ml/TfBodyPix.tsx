@@ -7,12 +7,13 @@ import * as bodyPix from '@tensorflow-models/body-pix'
 
 import '@tensorflow/tfjs-backend-webgl'
 import '@tensorflow/tfjs-core'
-import { useEffect, useRef, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import Webcam from 'react-webcam'
 
 export default function BodyPixComponent() {
   const [net, setNet] = useState<bodyPix.BodyPix | null>(null)
   const [isProcessing, setIsProcessing] = useState(false)
+  const [imgSrc, setImgSrc] = useState(null)
   const webcamRef = useRef<Webcam>(null)
   const canvasRef = useRef<HTMLCanvasElement>(null)
 
@@ -24,7 +25,7 @@ export default function BodyPixComponent() {
     loadNet()
   }, [])
 
-  const handleEstimatePoses = async () => {
+  const handleCapture = useCallback(async () => {
     if (!net || !webcamRef.current || !canvasRef.current) return
 
     setIsProcessing(true)
@@ -52,6 +53,10 @@ export default function BodyPixComponent() {
     )
 
     setIsProcessing(false)
+  }, [webcamRef])
+
+  const handleReset = () => {
+    setImgSrc(null)
   }
 
   return (
@@ -63,7 +68,7 @@ export default function BodyPixComponent() {
         </CardHeader>
         <CardContent>
           <div className="relative mb-4">
-            {/* <Webcam
+            <Webcam
               ref={webcamRef}
               audio={false}
               width={640}
@@ -75,7 +80,7 @@ export default function BodyPixComponent() {
                 facingMode: 'user',
               }}
               className="rounded-lg"
-            /> */}
+            />
             <canvas
               ref={canvasRef}
               width={640}
@@ -83,9 +88,19 @@ export default function BodyPixComponent() {
               className="absolute top-0 left-0 rounded-lg"
             />
           </div>
-          <Button onClick={handleEstimatePoses} disabled={!net || isProcessing}>
-            {isProcessing ? 'Processing...' : 'Estimate Poses'}
-          </Button>
+          {imgSrc ? (
+            <Button variant="outline" onClick={handleReset}>
+              Retake
+            </Button>
+          ) : (
+            <Button
+              variant="outline"
+              onClick={handleCapture}
+              disabled={!net || isProcessing}
+            >
+              Capture
+            </Button>
+          )}
         </CardContent>
       </Card>
     </div>

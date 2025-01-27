@@ -10,7 +10,6 @@ import '@tensorflow/tfjs-core'
 import { useCallback, useEffect, useReducer, useRef } from 'react'
 import { Group, Layer, Rect, Stage, Text } from 'react-konva'
 import Webcam from 'react-webcam'
-import { useInterval } from 'usehooks-ts'
 
 interface State {
   isReady: boolean
@@ -99,12 +98,17 @@ export default function TfCocoSsd() {
     )
   }, [])
 
-  useInterval(() => {
-    const input = webcamRef.current?.video
-    if (state.isReady && state.isTrackingEnabled && input) {
-      predict(input)
-    }
-  }, state.updateMilis)
+  useEffect(() => {
+    if (!state.isReady) return
+    const interval = setInterval(() => {
+      if (!state.isReady) return
+      const input = webcamRef.current?.video
+      if (state.isReady && state.isTrackingEnabled && input) {
+        predict(input)
+      }
+    }, state.updateMilis)
+    return () => clearInterval(interval)
+  }, [state])
 
   if (!state.isReady) {
     return <div>Loading...</div>
