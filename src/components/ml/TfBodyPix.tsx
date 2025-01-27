@@ -63,7 +63,7 @@ export default function BodyPixComponent() {
         </CardHeader>
         <CardContent>
           <div className="relative mb-4">
-            <Webcam
+            {/* <Webcam
               ref={webcamRef}
               audio={false}
               width={640}
@@ -75,7 +75,7 @@ export default function BodyPixComponent() {
                 facingMode: 'user',
               }}
               className="rounded-lg"
-            />
+            /> */}
             <canvas
               ref={canvasRef}
               width={640}
