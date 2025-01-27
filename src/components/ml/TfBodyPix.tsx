@@ -8,13 +8,13 @@ import * as bodyPix from '@tensorflow-models/body-pix'
 import '@tensorflow/tfjs-backend-webgl'
 import '@tensorflow/tfjs-core'
 import { useCallback, useEffect, useRef, useState } from 'react'
-import Webcam from 'react-webcam'
+import { Video } from '@/components/Video'
 
 export default function BodyPixComponent() {
   const [net, setNet] = useState<bodyPix.BodyPix | null>(null)
   const [isProcessing, setIsProcessing] = useState(false)
   const [imgSrc, setImgSrc] = useState(null)
-  const webcamRef = useRef<Webcam>(null)
+  const webcamRef = useRef<HTMLVideoElement>(null)
   const canvasRef = useRef<HTMLCanvasElement>(null)
 
   useEffect(() => {
@@ -30,7 +30,7 @@ export default function BodyPixComponent() {
 
     setIsProcessing(true)
 
-    const video = webcamRef.current.video
+    const video = webcamRef.current
     if (!video) return
 
     const canvas = canvasRef.current
@@ -68,18 +68,15 @@ export default function BodyPixComponent() {
         </CardHeader>
         <CardContent>
           <div className="relative mb-4">
-            <Webcam
-              ref={webcamRef}
-              audio={false}
+            <Video
+              ref={webcamRef as any}
               width={640}
               height={480}
-              screenshotFormat="image/jpeg"
-              videoConstraints={{
+              constraints={{
+                facingMode: 'user',
                 width: 640,
                 height: 480,
-                facingMode: 'user',
               }}
-              className="rounded-lg"
             />
             <canvas
               ref={canvasRef}
