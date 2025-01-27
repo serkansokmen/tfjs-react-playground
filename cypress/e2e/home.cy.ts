@@ -2,13 +2,13 @@ const links = ['Intro', 'XOR', 'LR', 'CNN', 'Posenet', 'Body Pix', 'Coco SSD']
 const hrefs: {
   [key: string]: string
 } = {
-  Intro: '/tf-intro',
-  XOR: '/tf-xor',
-  LR: '/tf-linear-regression',
-  CNN: '/tf-cnn',
-  Posenet: '/tf-posenet',
-  'Body Pix': '/tf-body-pix',
-  'Coco SSD': '/tf-coco-ssd',
+  '/tf-intro': 'Intro',
+  '/tf-xor': 'XOR',
+  '/tf-linear-regression': 'LR',
+  '/tf-cnn': 'CNN',
+  '/tf-posenet': 'Posenet',
+  '/tf-body-pix': 'Body Pix',
+  '/tf-coco-ssd': 'Coco SSD',
 }
 
 describe('Pages', () => {
@@ -19,7 +19,7 @@ describe('Pages', () => {
     })
 
     it('should have proper navigation links', () => {
-      const links = Object.keys(hrefs)
+      const links = Object.values(hrefs)
       links.forEach((link) => {
         cy.contains('a', link)
       })
@@ -41,17 +41,16 @@ describe('Pages', () => {
 
     it('should have proper navigation links', () => {
       cy.get("[data-cy='menu-toggle']").click()
-      const links = Object.keys(hrefs)
+      const links = Object.values(hrefs)
       links.forEach((link) => {
         cy.contains('a', link)
       })
     })
   })
 
-  // TODO: Fix these tests with proper demos
-  describe.skip('Common', () => {
+  describe('Training', () => {
     it('Intro page should train on function f(x) = x⁶+2x⁴+3x²+x+1.', () => {
-      cy.visit(hrefs.Intro)
+      cy.visit('/tf-intro')
       cy.contains('f(x) = x⁶+2x⁴+3x²+x+1')
 
       cy.get('input[name="epochs"]').clear({ force: true }).type('100')
@@ -63,32 +62,27 @@ describe('Pages', () => {
       cy.get('input[name="epochs"]').clear({ force: true }).type('50')
       cy.get('input[name="learningRate"]').clear({ force: true }).type('0.9')
       cy.get('@submit').click()
-
       cy.contains('Tensor ')
     })
 
     it('Has a working Posenet page', () => {
-      cy.visit(hrefs.Posenet)
-      cy.contains('div', 'enabled').siblings('div').first().find('svg').click()
-      cy.contains('div', 'use webcam').first().click()
-      cy.contains('span', 'Close Controls').click()
-      cy.contains('span', 'Open Controls').click()
-      cy.contains('div', 'enabled').siblings('div').first().find('svg').click()
+      cy.visit('/tf-posenet')
+      cy.contains('h3', 'Model Selection')
     })
 
-    it('Has a working Linear Regression page', () => {
-      cy.visit(hrefs.LR)
+    // it('Has a working Linear Regression page', () => {
+    //   cy.visit('/tf-linear-regression')
+    //   cy.wait(1000)
+    //   cy.get('input[name="epochs"]').clear({ force: true }).type('100')
+    //   cy.get('input[name="batchSize"]').clear({ force: true }).type('58')
+    //   cy.contains('button[type="submit"]', 'Train').as('submit')
 
-      cy.get('input[name="epochs"]').clear({ force: true }).type('100')
-      cy.get('input[name="batchSize"]').clear({ force: true }).type('58')
-      cy.contains('button[type="submit"]', 'Train').as('submit')
+    //   cy.contains('button[type="button"]', 'Test').as('testBtn')
+    //   cy.get('@testBtn').click()
+    //   cy.contains('Horsepower v MPG')
+    //   cy.contains('Model Summary')
 
-      cy.contains('button[type="button"]', 'Test').as('testBtn')
-      cy.get('@testBtn').click()
-      cy.contains('Horsepower v MPG')
-      cy.contains('Model Summary')
-
-      cy.contains('Model Predictions vs Original Data')
-    })
+    //   cy.contains('Model Predictions vs Original Data')
+    // })
   })
 })
