@@ -4,12 +4,12 @@
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Checkbox } from '@/components/ui/checkbox'
 import { Slider } from '@/components/ui/slider'
+import { Video } from '@/components/Video'
 import * as cocoSsd from '@tensorflow-models/coco-ssd'
 import '@tensorflow/tfjs-backend-webgl'
 import '@tensorflow/tfjs-core'
 import { useCallback, useEffect, useReducer, useRef } from 'react'
 import { Group, Layer, Rect, Stage, Text } from 'react-konva'
-import { Video } from '@/components/Video'
 
 interface State {
   isReady: boolean

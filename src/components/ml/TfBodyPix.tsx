@@ -5,10 +5,10 @@ import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import * as bodyPix from '@tensorflow-models/body-pix'
 
+import { Video } from '@/components/Video'
 import '@tensorflow/tfjs-backend-webgl'
 import '@tensorflow/tfjs-core'
 import { useCallback, useEffect, useRef, useState } from 'react'
-import { Video } from '@/components/Video'
 
 export default function BodyPixComponent() {
   const [net, setNet] = useState<bodyPix.BodyPix | null>(null)

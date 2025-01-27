@@ -1,14 +1,16 @@
 // components/video.tsx
 'use client'
 
-import { useEffect, useRef } from 'react'
+import { useEffect } from 'react'
 
-type VideoProps = {
+interface VideoProps extends React.HTMLAttributes<HTMLVideoElement> {
   ref: React.RefObject<HTMLVideoElement>
   constraints?: MediaTrackConstraints
-  className?: string
+  muted?: boolean
   width?: number
   height?: number
+  playing?: boolean
+  url?: string
 }
 
 export function Video({
@@ -21,7 +23,25 @@ export function Video({
   className,
   width = 640,
   height = 480,
+  muted = true,
+  playing = true,
+  url,
 }: VideoProps) {
+  if (url !== undefined) {
+    return (
+      <video
+        ref={ref}
+        autoPlay={playing}
+        muted={muted}
+        playsInline
+        width={width}
+        height={height}
+        className={className}
+        src={url}
+      />
+    )
+  }
+
   useEffect(() => {
     const initializeCamera = async () => {
       try {
