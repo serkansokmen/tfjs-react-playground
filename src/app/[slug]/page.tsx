@@ -4,10 +4,8 @@ import { redirect } from 'next/navigation'
 import { ComponentType } from 'react'
 
 type PageProps = {
-  params: {
-    slug: string
-  }
-  searchParams: { [key: string]: string | string[] | undefined }
+  params: Promise<{ slug: string }>
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>
 }
 
 type PageType = {
