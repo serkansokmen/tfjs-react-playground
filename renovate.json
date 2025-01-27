@@ -1,23 +1,20 @@
 {
-  "extends": ["config:base"],
+  "extends": ["config:recommended"],
   "baseBranches": ["develop"],
   "bumpVersion": null,
   "automerge": true,
   "assignees": ["serkansokmen"],
   "timezone": "Europe/Istanbul",
   "schedule": "before 8pm every weekday",
-  "lockFileMaintenance": {
-    "enabled": true,
-    "schedule": "after 10pm on sunday"
-  },
+  "lockFileMaintenance": { "enabled": true, "schedule": "after 10pm on sunday" },
   "packageRules": [
     {
-      "depTypeList": ["devDependencies"],
-      "updateTypes": ["minor"],
+      "matchDepTypes": ["devDependencies"],
+      "matchUpdateTypes": ["minor"],
       "automerge": true
     },
     {
-      "packageNames": [
+      "matchPackageNames": [
         "@tensorflow/tfjs",
         "@tensorflow/tfjs-backend-cpu",
         "@tensorflow/tfjs-backend-webgl",
@@ -26,17 +23,12 @@
       "groupName": "@tensorflow"
     },
     {
-      "packageNames": [
+      "matchPackageNames": [
         "@tensorflow-models/body-pix",
         "@tensorflow-models/coco-ssd",
         "@tensorflow-models/posenet"
       ],
       "groupName": "@tensorflow-models"
-    },
-    {
-      "packageNames": ["eslint"],
-      "allowedVersions": "8.x",
-      "groupName": "ESLint 8"
     }
   ]
 }
