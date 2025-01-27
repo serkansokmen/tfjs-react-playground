@@ -73,7 +73,7 @@ const componentData = [
 const components: ComponentsType = componentData.reduce(
   (acc, { componentPath, title, description, path }) => {
     acc[path] = {
-      component: dynamic(() => import(`@/components/${componentPath}`), { ssr: false }),
+      component: dynamic(() => import(`@/components/${componentPath}`)),
       metadata: {
         title,
         description,
@@ -88,12 +88,13 @@ export async function generateMetadata(
   { params, searchParams }: PageProps,
   parent: ResolvingMetadata
 ): Promise<Metadata> {
-  const page = components[params.slug]
+  const { slug } = await params
+  const page = components[slug]
   return page.metadata
 }
 
-export default function Page({ params, searchParams }: PageProps) {
-  const { slug = 'tf-intro' } = params
+export default async function Page({ params, searchParams }: PageProps) {
+  const { slug = 'tf-intro' } = await params
   const page = components[slug as string]
   if (!page) {
     // redirect as appropriate
