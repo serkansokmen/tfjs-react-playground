@@ -26,9 +26,12 @@ jobs:
         run: |
           echo "Debugging environment variables:"
           echo "GH_TOKEN: ${{ secrets.GITHUB_TOKEN != '' }}"
+      - name: Cypress install
+        run: npm install --legacy-peer-deps
       - name: Cypress run
         uses: cypress-io/github-action@v6
         with:
+          install: false
           build: npm run build
           start: npm start
           browser: chrome
