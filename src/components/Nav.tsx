@@ -21,14 +21,14 @@ function Nav() {
     <nav className="text-center">
       <ul className="flex justify-between p-4">
         <li className="flex p-2">
-          <Link href="/" className="text-primary text-sm no-underline">
+          <Link href="/" className="text-sm no-underline">
             Home
           </Link>
         </li>
         <ul className="flex">
           {links.map(({ href, label }) => (
             <li key={`nav-link-${href}-${label}`} className="flex p-2">
-              <Link href={href} className="text-primary text-sm no-underline">
+              <Link href={href} className="text-sm no-underline">
                 {label}
               </Link>
             </li>
