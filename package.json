@@ -57,32 +57,7 @@
     "cypress": "14.0.0",
     "eslint": "9.19.0",
     "eslint-config-next": "15.1.6",
-    "husky": "9.1.7",
-    "lint-staged": "15.4.3",
     "postcss": "8.5.1",
     "typescript": "5.7.3"
-  },
-  "lint-staged": {
-    "pages/**/*.{js,jsx,json,scss,css}": [
-      "prettier --config .prettierrc --write",
-      "git add"
-    ],
-    "lib/**/*.{js,jsx,json,scss,css}": [
-      "prettier --config .prettierrc --write",
-      "git add"
-    ],
-    "components/**/*.{js,jsx,json,scss,css}": [
-      "prettier --config .prettierrc --write",
-      "git add"
-    ],
-    "static/**/*.{json,scss,css}": [
-      "prettier --config .prettierrc --write",
-      "git add"
-    ]
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
   }
 }
