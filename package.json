@@ -53,7 +53,7 @@
     "@types/node": "22",
     "@types/react": "19.1.2",
     "@types/react-dom": "19.1.2",
-    "cypress": "14.3.0",
+    "cypress": "14.3.1",
     "eslint": "9.24.0",
     "eslint-config-next": "15.3.1",
     "postcss": "8.5.3",
